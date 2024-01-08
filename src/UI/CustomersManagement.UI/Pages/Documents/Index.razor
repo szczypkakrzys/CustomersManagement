@@ -1,0 +1,90 @@
+﻿@page "/documents/"
+
+<h3>Dokumenty</h3>
+
+@* <div class="m-2 d-flex justify-content-end">
+    <button @onclick="UploadDocument" class="btn btn-success">Dodaj nowy dokument</button>
+</div> *@
+
+@*todo:
+    - find why I get here Something went wrong. message after every successful document generation
+*@
+@* @if (string.IsNullOrEmpty(Message) == false)
+{
+    <div class="alert alert-danger">
+        @Message
+    </div>
+} *@
+
+@if (documents == null)
+{
+    <p>Ładowanie danych...</p>
+}
+else
+{
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>
+                    Nazwa dokumentu
+                </th>
+                <th>
+                    Akcje
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var document in documents)
+            {
+                <tr>
+                    <td>@document.FileName</td>
+                    <td>
+                      
+                         <button @onclick="@(() => Download(document.FileName))" class="btn btn-warning">Pobierz</button>
+                        @if (!showCustomers)
+                        {
+                            <button @onclick="@(() => LoadCustomers())" class="btn btn-info">Wypełnij</button>
+                        }
+                        else
+                        {
+                            <button @onclick="@(() => LoadCustomers())" class="btn btn-info">Wróć</button>
+                        }
+
+                        @*<button @onclick="@(() => DeleteCustomer(customer.Id))" class="btn btn-danger">Usuń</button> *@
+                    </td>
+                </tr>
+
+                @*todo:
+        create method that will show the view and will return id of choosen user so it can be used in GenerateDocumentForCustomer() method
+                *@
+                @if (showCustomers)
+                {
+                    <tr>
+                        @if (customers.Count == 0)
+                        {
+                            <p>Ładowanie danych...</p>
+                        }
+
+                        @foreach (var customer in customers)
+                        {
+                            @* todo: add search bar *@
+                            <tr>
+                            <td>@customer.FirstName @customer.LastName</td>
+                                <td>
+                                    <button @onclick="@(() => GenerateDocumentForCustomer(@document.FileName, @customer.Id))" class="btn btn-warning">Wybierz</button>
+                                    @* document id customer id *@
+                                </td>
+                            </tr>
+                        }
+                    </tr>
+                    
+                }      
+            }
+        </tbody>
+
+    </table>
+}
+
+

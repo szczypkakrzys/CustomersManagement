@@ -4,6 +4,7 @@ using CustomersManagement.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomersManagement.Persistence.Migrations
 {
     [DbContext(typeof(ClientsDatabaseContext))]
-    partial class ClientsDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240107164035_addDocumentEntity")]
+    partial class addDocumentEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,7 +106,7 @@ namespace CustomersManagement.Persistence.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClienId")
+                    b.Property<int>("ClienId")
                         .HasColumnType("int");
 
                     b.Property<string>("FileName")
@@ -129,7 +132,9 @@ namespace CustomersManagement.Persistence.Migrations
                 {
                     b.HasOne("CustomersManagement.Domain.Client", "Client")
                         .WithMany("Documents")
-                        .HasForeignKey("Id");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Client");
                 });
@@ -138,7 +143,6 @@ namespace CustomersManagement.Persistence.Migrations
                 {
                     b.Navigation("Documents");
                 });
-                
 #pragma warning restore 612, 618
         }
     }

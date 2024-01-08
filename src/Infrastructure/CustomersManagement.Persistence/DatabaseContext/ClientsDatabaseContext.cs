@@ -18,6 +18,12 @@ public class ClientsDatabaseContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ClientsDatabaseContext).Assembly);
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Client>()
+            .HasMany(e => e.Documents)
+            .WithOne(e => e.Client)
+            .HasForeignKey(e => e.Id)
+            .IsRequired(false);
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
