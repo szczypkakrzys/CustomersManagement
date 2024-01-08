@@ -12,6 +12,9 @@ public static class InfrastructureServicesRegistration
         IConfiguration configuration)
     {
         services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+        //todo
+        //when finally ready - add services to infastructure there
+        //services.AddScoped(typeof(DocumentFormsService<>), typeof(IDocumentsFormFill<>));
 
         return services;
     }
