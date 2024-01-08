@@ -1,0 +1,29 @@
+﻿@page "/customers/create"
+
+<div class="container">
+    <h3>Create Customer</h3>
+    <EditForm Model="@customer" OnValidSubmit="@CreateCustomer">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="firstName" class="form-label">Imię:</label>
+            <InputText id="firstName" @bind-Value="customer.FirstName" class="form-control" />
+            <ValidationMessage For="@(() => customer.FirstName)" />
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Nazwisko:</label>
+            <InputText id="lastName" @bind-Value="customer.LastName" class="form-control" />
+            <ValidationMessage For="@(() => customer.LastName)" />
+        </div>
+
+        <div class="mb-3">
+            <label for="emailAddress" class="form-label">Adres e-mail:</label>
+            <InputText id="emailAddress" @bind-Value="customer.EmailAddress" class="form-control" />
+            <ValidationMessage For="@(() => customer.EmailAddress)" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Customer</button>
+    </EditForm>
+</div>
