@@ -138,6 +138,7 @@ namespace CustomersManagement.Persistence.Migrations
                 {
                     b.Navigation("Documents");
                 });
+                
 #pragma warning restore 612, 618
         }
     }
