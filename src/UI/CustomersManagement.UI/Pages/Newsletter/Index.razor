@@ -1,0 +1,58 @@
+﻿@page "/newsletter/"
+
+@using Blazored.TextEditor
+
+<BlazoredTextEditor @ref="@QuillHtml">
+    <ToolbarContent>
+        <select class="ql-header">
+            <option selected=""></option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+            <option value="4"></option>
+            <option value="5"></option>
+        </select>
+        <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-underline"></button>
+            <button class="ql-strike"></button>
+        </span>
+        <span class="ql-formats">
+            <select class="ql-color"></select>
+            <select class="ql-background"></select>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-link"></button>
+        </span>
+    </ToolbarContent>
+    <EditorContent>
+        <h1>Przykładowa wiadomość dla klienta</h1>
+        <img src="https://www.shutterstock.com/image-photo/side-view-medium-fawn-alpaca-600nw-2158343693.jpg" />
+    </EditorContent>
+</BlazoredTextEditor>
+<br />
+<button class="btn btn-success" @onclick="sendMessage">
+    Wyślij wiadomość
+</button>
+@* <button class="btn btn-primary"
+        @onclick="GetHTML">
+    Get HTML
+</button>
+<button class="btn btn-primary"
+        @onclick="SetHTML">
+    Set HTML
+</button> *@
+<br />
+@* <div>
+    <br />
+    @((MarkupString)HtmlContent)
+    @HtmlContent
+</div> *@
+<br />
+
+

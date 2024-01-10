@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CustomersManagement.UI.Models.Customers;
 using CustomersManagement.UI.Models.Documents;
+using CustomersManagement.UI.Models.Newsletter;
 using CustomersManagement.UI.Services.Base;
 
 namespace CustomersManagement.UI.MappingProfiles;
@@ -15,5 +16,7 @@ public class MappingConfig : Profile
         CreateMap<UpdateClientCommand, CustomerVM>().ReverseMap();
 
         CreateMap<DocumentDto, DocumentVM>().ReverseMap();
+
+        CreateMap<EmailVM, SendEmailCommand>();
     }
 }
