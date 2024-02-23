@@ -7,4 +7,6 @@ public interface IDocumentService
 {
     Task<List<DocumentVM>> GetAllDocuments();
     Task<Response<Guid>> GenerateDocument(string fileName, int customerId);
+    Task<Response<Guid>> UploadDocument(IEnumerable<FileParameter> documents, DocumentType type);
+    Task<Response<Guid>> DownloadDocument(int id, string fileName);
 }

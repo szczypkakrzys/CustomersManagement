@@ -24,13 +24,22 @@ public class GetAllDocumentsTemplatesQueryHandler : IRequestHandler<GetAllDocume
         GetAllDocumentsTemplatesQuery request,
         CancellationToken cancellationToken)
     {
+
+        var documentsTemplates = await _documentRepository.GetAllDocumentsTemplates();
+
+        var data = _mapper.Map<List<DocumentDto>>(documentsTemplates);
+        _logger.LogInformation("All documents were retrieved successfullly");
+        return data;
+        //var documentsTemplates = await _documentRepository.GetAsync()
         //todo:
         //implement double checking with database if I want user's custom naming for files 
         //move to separete service class :D
         //take care of that custom mapping
+        //shoot to database :D
 
         //just a temporary solution as long as I use FileSystem to store documents 
-        var localDirectoryPath = Path.Combine("C:\\Users\\Krzysiek\\repos\\CustomersManagement\\src\\TmpFilesStore\\Templates");
+        /*
+        var localDirectoryPath = Path.Combine("path path path");
         var directory = new DirectoryInfo(localDirectoryPath);
         if (!directory.Exists)
         {
@@ -43,6 +52,7 @@ public class GetAllDocumentsTemplatesQueryHandler : IRequestHandler<GetAllDocume
 
         _logger.LogInformation("All documents were retrieved successfullly");
         return data;
+        */
     }
 
     private static List<DocumentDto> MapToDocumentDto(FileSystemInfo[] files)

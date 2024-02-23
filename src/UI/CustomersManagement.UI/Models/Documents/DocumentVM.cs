@@ -2,6 +2,7 @@
 
 public class DocumentVM
 {
+    public int Id { get; set; }
     public string FileName { get; set; } = string.Empty;
     //todo:
     //create custom mapper to below properties

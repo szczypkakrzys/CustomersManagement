@@ -1,0 +1,29 @@
+﻿@page "/documents/upload"
+@using System.Net.Http.Headers
+@using CustomersManagement.UI.Contracts
+@using CustomersManagement.UI.Services.Base
+@inject HttpClient Http
+
+<h3>Dodaj dokument</h3>
+
+<p>
+    <label>
+        Upload up to @maxAllowedFiles files:
+        <InputFile OnChange="@OnInputFileChange" multiple />
+    </label>
+</p>
+
+@if(fileNames.Count > 0)
+{
+    <ul>
+        @foreach(var fileName in fileNames)
+        {
+            <li>
+                File: @fileName
+            </li>
+        }
+    </ul>
+}
+
+
+

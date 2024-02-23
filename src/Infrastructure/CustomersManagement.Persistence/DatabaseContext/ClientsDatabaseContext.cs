@@ -13,17 +13,32 @@ public class ClientsDatabaseContext : DbContext
 
     public DbSet<Client> Clients { get; set; }
     public DbSet<Address> Addresses { get; set; }
+    public DbSet<Document> Documents { get; set; }
+    public DbSet<FormFillRulesSet> FormFillRulesSets { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ClientsDatabaseContext).Assembly);
         base.OnModelCreating(modelBuilder);
 
+
         modelBuilder.Entity<Client>()
-            .HasMany(e => e.Documents)
-            .WithOne(e => e.Client)
-            .HasForeignKey(e => e.Id)
+            .HasMany(client => client.Documents)
+            .WithOne(document => document.Client)
+            .HasForeignKey(document => document.ClientId)
             .IsRequired(false);
+
+        modelBuilder.Entity<Document>()
+            .HasOne(document => document.FormFillRulesSet)
+            .WithOne(formFillRulesSet => formFillRulesSet.Document)
+            .HasForeignKey<FormFillRulesSet>(formFillRulesSet => formFillRulesSet.DocumentId)
+            .IsRequired(false);
+
+        modelBuilder.Entity<FormFillRulesSet>()
+            .HasOne(formFillRulesSet => formFillRulesSet.Document)
+            .WithOne(document => document.FormFillRulesSet)
+            .HasForeignKey<FormFillRulesSet>(formFillRulesSet => formFillRulesSet.DocumentId)
+            .IsRequired();
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

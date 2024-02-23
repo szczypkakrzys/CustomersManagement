@@ -2,6 +2,7 @@ using CustomersManagement.UI.Contracts;
 using CustomersManagement.UI.Models.Customers;
 using CustomersManagement.UI.Models.Documents;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace CustomersManagement.UI.Pages.Documents;
 
@@ -12,6 +13,9 @@ public partial class Index
 
     [Inject]
     public IDocumentService _documentsClient { get; set; }
+
+    [Inject]
+    public IJSRuntime _js { get; set; }
 
     public List<DocumentVM> documents { get; private set; }
     public string Message { get; set; } = string.Empty;
@@ -40,14 +44,17 @@ public partial class Index
             customers = await _customersClient.GetAllCustomers();
     }
 
-    protected async Task Download(string fileName)
+    protected async Task Download(int id, string fileName)
     {
         //var response = await _client.CreateCustomer(customer);
         //if (!response.IsSuccess)
         //{
         //    Message = response.Message;
         //}
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+
+        var response = await _documentsClient.DownloadDocument(id, fileName);
+
     }
 
     protected async Task GenerateDocumentForCustomer(string fileName, int customerId)
@@ -63,5 +70,10 @@ public partial class Index
             _navManager.NavigateTo("/customers/");
         }
         Message = response.Message;
+    }
+
+    protected void UploadDocument()
+    {
+        _navManager.NavigateTo("/documents/upload");
     }
 }

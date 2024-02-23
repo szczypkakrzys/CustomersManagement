@@ -14,11 +14,17 @@
       <PackageReference Include="itext7" Version="8.0.2" />
       <PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.2" />
       <PackageReference Include="MediatR" Version="12.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     </ItemGroup>
 
 
     <ItemGroup>
       <ProjectReference Include="..\CustomersManagement.Domain\CustomersManagement.Domain.csproj" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Folder Include="Features\Documents\Queries\GetDocumentById\" />
     </ItemGroup>
 
 </Project>

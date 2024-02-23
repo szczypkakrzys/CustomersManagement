@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomersManagement.Persistence.Migrations
 {
     [DbContext(typeof(ClientsDatabaseContext))]
-    [Migration("20240107174620_changeRelationShipBetweenDocumentandCustomerToOptional")]
-    partial class changeRelationShipBetweenDocumentandCustomerToOptional
+    [Migration("20240127163433_addDocumentContentType")]
+    partial class addDocumentContentType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,9 +93,27 @@ namespace CustomersManagement.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            EmailAddress = "email@email.com",
-                            FirstName = "FirstName",
-                            LastName = "LastName",
+                            EmailAddress = "testertester@email.com",
+                            FirstName = "TesterImie",
+                            LastName = "TesterNazwisko",
+                            TimeCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TimeLastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EmailAddress = "jkowalski@email.com",
+                            FirstName = "Jan",
+                            LastName = "Kowalski",
+                            TimeCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TimeLastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EmailAddress = "anowak@email.com",
+                            FirstName = "Andrzej",
+                            LastName = "Nowak",
                             TimeCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TimeLastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -104,14 +122,24 @@ namespace CustomersManagement.Persistence.Migrations
             modelBuilder.Entity("CustomersManagement.Domain.Document", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClienId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ClientId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FormFillRulesSetId")
+                        .HasColumnType("int");
 
                     b.Property<string>("RemotePath")
                         .IsRequired()
@@ -123,23 +151,78 @@ namespace CustomersManagement.Persistence.Migrations
                     b.Property<DateTime>("TimeLastModified")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Document");
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("CustomersManagement.Domain.FormFillRulesSet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PropertiesRequiredToFillDocument")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextBoxesWithValues")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TimeLastModified")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentId")
+                        .IsUnique();
+
+                    b.ToTable("FormFillRulesSets");
                 });
 
             modelBuilder.Entity("CustomersManagement.Domain.Document", b =>
                 {
                     b.HasOne("CustomersManagement.Domain.Client", "Client")
                         .WithMany("Documents")
-                        .HasForeignKey("Id");
+                        .HasForeignKey("ClientId");
 
                     b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("CustomersManagement.Domain.FormFillRulesSet", b =>
+                {
+                    b.HasOne("CustomersManagement.Domain.Document", "Document")
+                        .WithOne("FormFillRulesSet")
+                        .HasForeignKey("CustomersManagement.Domain.FormFillRulesSet", "DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("CustomersManagement.Domain.Client", b =>
                 {
                     b.Navigation("Documents");
+                });
+
+            modelBuilder.Entity("CustomersManagement.Domain.Document", b =>
+                {
+                    b.Navigation("FormFillRulesSet");
                 });
 #pragma warning restore 612, 618
         }
