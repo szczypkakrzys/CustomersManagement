@@ -1,3 +1,4 @@
+using CustomersManagement.Api.Middleware;
 using CustomersManagement.Application;
 using CustomersManagement.Infrastructure;
 using CustomersManagement.Persistence;
@@ -24,6 +25,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
