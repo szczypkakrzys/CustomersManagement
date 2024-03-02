@@ -7,7 +7,7 @@ namespace CustomersManagement.UI.Pages.Customers;
 public partial class Edit
 {
     [Inject]
-    ICustomerService _client { get; set; }
+    ICustomerService _customer { get; set; }
     [Inject]
     NavigationManager _navManager { get; set; }
 
@@ -19,12 +19,12 @@ public partial class Edit
 
     protected override async Task OnParametersSetAsync()
     {
-        customer = await _client.GetCustomerDetails(id);
+        customer = await _customer.GetCustomerDetails(id);
     }
 
     private async Task UpdateCustomer()
     {
-        var response = await _client.UpdateCustomer(id, customer);
+        var response = await _customer.UpdateCustomer(id, customer);
         if (response.IsSuccess)
         {
             _navManager.NavigateTo("/customers/");

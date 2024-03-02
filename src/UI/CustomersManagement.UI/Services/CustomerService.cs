@@ -20,8 +20,8 @@ public class CustomerService : BaseHttpService, ICustomerService
     {
         try
         {
-            var createCustomerCommand = _mapper.Map<CreateClientCommand>(customer);
-            await _client.ClientsPOSTAsync(createCustomerCommand);
+            var createCustomerCommand = _mapper.Map<CreateCustomerCommand>(customer);
+            await _client.CustomersPOSTAsync(createCustomerCommand);
             return new Response<Guid>() { IsSuccess = true };
         }
         catch (ApiException ex)
@@ -34,7 +34,7 @@ public class CustomerService : BaseHttpService, ICustomerService
     {
         try
         {
-            await _client.ClientsDELETEAsync(id);
+            await _client.CustomersDELETEAsync(id);
             return new Response<Guid>() { IsSuccess = true };
         }
         catch (ApiException ex)
@@ -45,13 +45,13 @@ public class CustomerService : BaseHttpService, ICustomerService
 
     public async Task<List<CustomerVM>> GetAllCustomers()
     {
-        var customers = await _client.ClientsAllAsync();
+        var customers = await _client.CustomersAllAsync();
         return _mapper.Map<List<CustomerVM>>(customers);
     }
 
     public async Task<CustomerVM> GetCustomerDetails(int id)
     {
-        var customer = await _client.ClientsGETAsync(id);
+        var customer = await _client.CustomersGETAsync(id);
         return _mapper.Map<CustomerVM>(customer);
     }
 
@@ -59,8 +59,8 @@ public class CustomerService : BaseHttpService, ICustomerService
     {
         try
         {
-            var updateCustomerCommand = _mapper.Map<UpdateClientCommand>(customer);
-            await _client.ClientsPUTAsync(id.ToString(), updateCustomerCommand);
+            var updateCustomerCommand = _mapper.Map<UpdateCustomerCommand>(customer);
+            await _client.CustomersPUTAsync(id.ToString(), updateCustomerCommand);
             return new Response<Guid>() { IsSuccess = true };
         }
         catch (ApiException ex)

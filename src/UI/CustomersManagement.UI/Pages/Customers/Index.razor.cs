@@ -10,7 +10,7 @@ public partial class Index
     public NavigationManager _navManager { get; set; }
 
     [Inject]
-    public ICustomerService _client { get; set; }
+    public ICustomerService _customer { get; set; }
 
     public List<CustomerVM> customers { get; private set; }
     public string Message { get; set; } = string.Empty;
@@ -37,7 +37,7 @@ public partial class Index
 
     protected async Task DeleteCustomer(int id)
     {
-        var response = await _client.DeleteCustomer(id);
+        var response = await _customer.DeleteCustomer(id);
         if (response.IsSuccess)
         {
             await LoadCustomers();
@@ -50,7 +50,7 @@ public partial class Index
 
     protected async Task LoadCustomers()
     {
-        customers = await _client.GetAllCustomers();
+        customers = await _customer.GetAllCustomers();
     }
 
 }

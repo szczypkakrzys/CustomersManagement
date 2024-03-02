@@ -13,13 +13,13 @@ public static class PersistenceServiceRegistration
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDbContext<ClientsDatabaseContext>(options =>
+        services.AddDbContext<CustomerDatabaseContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("ClientsDatabaseConnectionString"));
+            options.UseSqlServer(configuration.GetConnectionString("CustomersDatabaseConnectionString"));
         });
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IAddressRepository, AddressReposiotry>();
 
         return services;

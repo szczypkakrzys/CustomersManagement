@@ -8,9 +8,9 @@ public class MappingConfig : Profile
 {
     public MappingConfig()
     {
-        CreateMap<ClientDto, CustomerVM>().ReverseMap();
-        CreateMap<ClientDetailsDto, CustomerVM>().ReverseMap();
-        CreateMap<CreateClientCommand, CustomerVM>().ReverseMap();
-        CreateMap<UpdateClientCommand, CustomerVM>().ReverseMap();
+        CreateMap<CustomerDto, CustomerVM>().ReverseMap();
+        CreateMap<CustomerDetailsDto, CustomerVM>().ReverseMap();
+        CreateMap<CreateCustomerCommand, CustomerVM>().ReverseMap();
+        CreateMap<UpdateCustomerCommand, CustomerVM>().ReverseMap();
     }
 }

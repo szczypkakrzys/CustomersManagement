@@ -6,7 +6,7 @@ namespace CustomersManagement.Persistence.Repositories;
 
 public class AddressReposiotry : GenericRepository<Address>, IAddressRepository
 {
-    public AddressReposiotry(ClientsDatabaseContext context) : base(context)
+    public AddressReposiotry(CustomerDatabaseContext context) : base(context)
     {
     }
 }

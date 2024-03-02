@@ -7,9 +7,9 @@ namespace CustomersManagement.Persistence.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
-    protected readonly ClientsDatabaseContext _context;
+    protected readonly CustomerDatabaseContext _context;
 
-    public GenericRepository(ClientsDatabaseContext context)
+    public GenericRepository(CustomerDatabaseContext context)
     {
         _context = context;
     }
