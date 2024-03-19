@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\CustomersManagement.Identity\CustomersManagement.Identity.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\CustomersManagement.Identity\CustomersManagement.Identity.csproj" />
     <ProjectReference Include="..\..\Core\CustomersManagement.Application\CustomersManagement.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CustomersManagement.Identity\CustomersManagement.Identity.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CustomersManagement.Infrastructure\CustomersManagement.Infrastructure.csproj" />
