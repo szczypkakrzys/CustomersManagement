@@ -7,15 +7,15 @@ namespace CustomersManagement.UI.Pages.Customers;
 public partial class Details
 {
     [Inject]
-    ICustomerService _customer { get; set; }
+    ICustomerService Customer { get; set; }
 
     [Parameter]
-    public int id { get; set; }
+    public int Id { get; set; }
 
-    CustomerVM customer = new CustomerVM();
+    CustomerVM customer = new();
 
     protected override async Task OnParametersSetAsync()
     {
-        customer = await _customer.GetCustomerDetails(id);
+        customer = await Customer.GetCustomerDetails(Id);
     }
 }

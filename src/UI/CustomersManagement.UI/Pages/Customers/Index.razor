@@ -13,7 +13,7 @@
     </div>
 }
 
-@if(customers == null)
+@if(Customers == null)
 {
     <p>Ładowanie danych...</p>
 }
@@ -39,7 +39,7 @@ else
         </thead>
 
         <tbody>
-            @foreach(var customer in customers)
+            @foreach(var customer in Customers)
             {
                 <tr>
                     <td>@customer.Id</td>

@@ -28,7 +28,9 @@ public class ApiAuthenticationStateProvider : AuthenticationStateProvider
 
         if (tokenContent.ValidTo < DateTime.Now)
         {
-            await _localStorage.RemoveItemAsync("token");
+            //TODO
+            //resolve all datetime issues
+            //await _localStorage.RemoveItemAsync("token");
             return new AuthenticationState(user);
         }
 

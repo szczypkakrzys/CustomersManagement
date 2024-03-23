@@ -7,12 +7,12 @@ namespace CustomersManagement.UI.Pages.Customers;
 public partial class Index
 {
     [Inject]
-    public NavigationManager _navManager { get; set; }
+    public NavigationManager NavManager { get; set; }
 
     [Inject]
-    public ICustomerService _customer { get; set; }
+    public ICustomerService Customer { get; set; }
 
-    public List<CustomerVM> customers { get; private set; }
+    public List<CustomerVM> Customers { get; private set; }
     public string Message { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
@@ -22,22 +22,22 @@ public partial class Index
 
     protected void CreateCustomer()
     {
-        _navManager.NavigateTo("/customers/create/");
+        NavManager.NavigateTo("/customers/create/");
     }
 
     protected void EditCustomer(int id)
     {
-        _navManager.NavigateTo($"/customers/edit/{id}");
+        NavManager.NavigateTo($"/customers/edit/{id}");
     }
 
     protected void CustomerDetails(int id)
     {
-        _navManager.NavigateTo($"/customers/details/{id}");
+        NavManager.NavigateTo($"/customers/details/{id}");
     }
 
     protected async Task DeleteCustomer(int id)
     {
-        var response = await _customer.DeleteCustomer(id);
+        var response = await Customer.DeleteCustomer(id);
         if (response.IsSuccess)
         {
             await LoadCustomers();
@@ -50,7 +50,7 @@ public partial class Index
 
     protected async Task LoadCustomers()
     {
-        customers = await _customer.GetAllCustomers();
+        Customers = await Customer.GetAllCustomers();
     }
 
 }

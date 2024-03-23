@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using CustomersManagement.UI.Contracts;
+using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Providers;
 using CustomersManagement.UI.Services.Base;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -34,8 +35,6 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
             {
                 await _localStorage.SetItemAsync("token", authenticationResponse.Token);
 
-                //set claims in Blazor and login state
-
                 await ((ApiAuthenticationStateProvider)
                     _authenticationStateProvider).LoggedIn();
 
@@ -53,20 +52,21 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
 
     public async Task Logout()
     {
-        //remove claims in Blazor and invalidate login state
         await ((ApiAuthenticationStateProvider)
             _authenticationStateProvider).LoggedOut();
     }
 
-    public async Task<bool> RegisterAsync(string firstName, string lastName, string userName, string email, string password)
+    public async Task<bool> RegisterAsync(RegisterVM request)
     {
         var registrationRequest = new RegistrationRequest()
         {
-            FirstName = firstName,
-            LastName = lastName,
-            EmailAddress = email,
-            UserName = userName,
-            Password = password
+            //todo
+            //use automapper
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            EmailAddress = request.Email,
+            UserName = request.UserName,
+            Password = request.Password
         };
 
         var response = await _client.RegisterAsync(registrationRequest);

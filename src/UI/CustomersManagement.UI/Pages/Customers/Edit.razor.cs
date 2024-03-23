@@ -7,27 +7,28 @@ namespace CustomersManagement.UI.Pages.Customers;
 public partial class Edit
 {
     [Inject]
-    ICustomerService _customer { get; set; }
+    ICustomerService Customer { get; set; }
+
     [Inject]
-    NavigationManager _navManager { get; set; }
+    NavigationManager NavManager { get; set; }
 
     [Parameter]
-    public int id { get; set; }
+    public int Id { get; set; }
     public string Message { get; private set; }
 
-    CustomerVM customer = new CustomerVM();
+    CustomerVM customer = new();
 
     protected override async Task OnParametersSetAsync()
     {
-        customer = await _customer.GetCustomerDetails(id);
+        customer = await Customer.GetCustomerDetails(Id);
     }
 
     private async Task UpdateCustomer()
     {
-        var response = await _customer.UpdateCustomer(id, customer);
+        var response = await Customer.UpdateCustomer(Id, customer);
         if (response.IsSuccess)
         {
-            _navManager.NavigateTo("/customers/");
+            NavManager.NavigateTo("/customers/");
         }
         Message = response.Message;
     }
