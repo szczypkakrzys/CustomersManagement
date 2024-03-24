@@ -5,7 +5,7 @@ namespace CustomersManagement.Application.Models.Identity;
 public class RegistrationRequest
 {
     //TODO
-    //improve below data validation - can use fluent validation
+    //update whole auth to .NET 8 solution
 
     [Required]
     public string FirstName { get; set; }

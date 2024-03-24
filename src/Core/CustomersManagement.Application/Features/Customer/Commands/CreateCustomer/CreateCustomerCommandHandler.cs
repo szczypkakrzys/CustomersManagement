@@ -26,8 +26,6 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
         CreateCustomerCommand request,
         CancellationToken cancellationToken)
     {
-        //todo
-        //validate incoming data
         var validator = new CreateCustomerCommandValidator(_customerRepository);
         var validtionResult = await validator.ValidateAsync(request);
 
@@ -37,13 +35,10 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
             throw new BadRequestException("Invalid Customer", validtionResult);
         }
 
-        //convert to domain entity object
         var customerToCreate = _mapper.Map<Domain.Customer>(request);
 
-        //add to database
         await _customerRepository.CreateAsync(customerToCreate);
 
-        //return record id
         return customerToCreate.Id;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Models.Customers;
 using CustomersManagement.UI.Services.Base;
 
@@ -12,5 +13,7 @@ public class MappingConfig : Profile
         CreateMap<CustomerDetailsDto, CustomerVM>().ReverseMap();
         CreateMap<CreateCustomerCommand, CustomerVM>().ReverseMap();
         CreateMap<UpdateCustomerCommand, CustomerVM>().ReverseMap();
+        CreateMap<RegisterVM, RegistrationRequest>()
+            .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(src => src.Email));
     }
 }

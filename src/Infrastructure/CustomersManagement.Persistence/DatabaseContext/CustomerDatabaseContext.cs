@@ -25,10 +25,10 @@ public class CustomerDatabaseContext : DbContext
         foreach (var entry in base.ChangeTracker.Entries<BaseEntity>()
             .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
         {
-            entry.Entity.TimeLastModified = DateTime.UtcNow;
+            entry.Entity.TimeLastModifiedInUtc = DateTime.UtcNow;
 
             if (entry.State == EntityState.Added)
-                entry.Entity.TimeCreated = DateTime.UtcNow;
+                entry.Entity.TimeCreatedInUtc = DateTime.UtcNow;
         }
 
         return base.SaveChangesAsync(cancellationToken);

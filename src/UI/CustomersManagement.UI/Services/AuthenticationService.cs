@@ -1,4 +1,5 @@
-﻿using Blazored.LocalStorage;
+﻿using AutoMapper;
+using Blazored.LocalStorage;
 using CustomersManagement.UI.Contracts;
 using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Providers;
@@ -9,13 +10,16 @@ namespace CustomersManagement.UI.Services;
 
 public class AuthenticationService : BaseHttpService, IAuthenticationService
 {
+    private readonly IMapper _mapper;
     private readonly AuthenticationStateProvider _authenticationStateProvider;
 
     public AuthenticationService(
         IClient client,
         ILocalStorageService localStorageService,
+        IMapper mapper,
         AuthenticationStateProvider authenticationStateProvider) : base(client, localStorageService)
     {
+        _mapper = mapper;
         _authenticationStateProvider = authenticationStateProvider;
     }
 
@@ -58,16 +62,7 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
 
     public async Task<bool> RegisterAsync(RegisterVM request)
     {
-        var registrationRequest = new RegistrationRequest()
-        {
-            //todo
-            //use automapper
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            EmailAddress = request.Email,
-            UserName = request.UserName,
-            Password = request.Password
-        };
+        var registrationRequest = _mapper.Map<RegistrationRequest>(request);
 
         var response = await _client.RegisterAsync(registrationRequest);
 

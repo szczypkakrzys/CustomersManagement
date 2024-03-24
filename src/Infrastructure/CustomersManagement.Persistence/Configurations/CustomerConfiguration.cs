@@ -12,14 +12,30 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             new Customer
             {
                 Id = 1,
-                FirstName = "FirstName",
-                LastName = "LastName",
-                EmailAddress = "email@email.com"
+                FirstName = "James",
+                LastName = "Williams",
+                EmailAddress = "jwilliams@email.com"
+            },
+            new Customer
+            {
+                Id = 2,
+                FirstName = "Richard",
+                LastName = "Johson",
+                EmailAddress = "rjohson@email.com"
+            },
+            new Customer
+            {
+                Id = 3,
+                FirstName = "George",
+                LastName = "Smith",
+                EmailAddress = "gsmith@email.com"
             });
 
-        //todo
-        //define database restriction rules
         builder.Property(q => q.FirstName)
+            .IsRequired();
+        builder.Property(q => q.LastName)
+            .IsRequired();
+        builder.Property(q => q.EmailAddress)
             .IsRequired();
     }
 }

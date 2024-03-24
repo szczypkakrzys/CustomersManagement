@@ -11,9 +11,7 @@ namespace CustomersManagement.Application.MappingProfiles
     {
         public CustomerProfile()
         {
-            //todo
-            //check whether I need two ways mapping
-            CreateMap<CustomerDto, Customer>().ReverseMap();
+            CreateMap<Customer, CustomerDto>();
             CreateMap<CustomerDetailsDto, Customer>().ReverseMap();
             CreateMap<CreateCustomerCommand, Customer>();
             CreateMap<UpdateCustomerCommand, Customer>();
