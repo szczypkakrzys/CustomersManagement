@@ -46,9 +46,6 @@ else
                     <td>@customer.FirstName</td>
                     <td>@customer.LastName</td>
                     <td>
-                       @*  <button @onclick=@(() => )>
-                            
-                        </button> *@
                         <button @onclick="@(() => EditCustomer(customer.Id))" class="btn btn-warning">Edytuj</button>
                         <button @onclick="@(() => CustomerDetails(customer.Id))" class="btn btn-info">Szczegóły</button>
                         <button @onclick="@(() => DeleteCustomer(customer.Id))" class="btn btn-danger">Usuń</button>

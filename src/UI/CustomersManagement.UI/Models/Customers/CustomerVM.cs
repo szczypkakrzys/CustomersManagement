@@ -4,16 +4,15 @@ namespace CustomersManagement.UI.Models.Customers;
 
 public class CustomerVM
 {
-    //todo
-    //add here client site validation - because API calls all the time are expensive :D
     public int Id { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Imię jest wymagane")]
     public string FirstName { get; set; } = string.Empty;
 
-    [Required]
+    [Required(ErrorMessage = "Nazwisko jest wymagane")]
     public string LastName { get; set; } = string.Empty;
 
-    [Required]
+    [Required(ErrorMessage = "Adres e-mail jest wymagany")]
+    [EmailAddress(ErrorMessage = "Podany adres e-mail nie jest w poprawnym formacie")]
     public string EmailAddress { get; set; } = string.Empty;
 }

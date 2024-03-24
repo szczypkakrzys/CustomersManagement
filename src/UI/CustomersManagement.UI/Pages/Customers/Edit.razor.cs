@@ -16,16 +16,16 @@ public partial class Edit
     public int Id { get; set; }
     public string Message { get; private set; }
 
-    CustomerVM customer = new();
+    CustomerVM Model = new();
 
     protected override async Task OnParametersSetAsync()
     {
-        customer = await Customer.GetCustomerDetails(Id);
+        Model = await Customer.GetCustomerDetails(Id);
     }
 
     private async Task UpdateCustomer()
     {
-        var response = await Customer.UpdateCustomer(Id, customer);
+        var response = await Customer.UpdateCustomer(Id, Model);
         if (response.IsSuccess)
         {
             NavManager.NavigateTo("/customers/");

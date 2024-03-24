@@ -14,10 +14,11 @@ public partial class Create
 
     public string Message { get; set; } = string.Empty;
 
-    CustomerVM customer = new();
+    public CustomerVM Model = new();
+
     async Task CreateCustomer()
     {
-        var response = await Customer.CreateCustomer(customer);
+        var response = await Customer.CreateCustomer(Model);
         if (response.IsSuccess)
         {
             NavManager.NavigateTo("/customers/");
