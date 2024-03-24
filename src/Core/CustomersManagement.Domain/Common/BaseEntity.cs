@@ -3,6 +3,6 @@
 public abstract class BaseEntity
 {
     public int Id { get; set; }
-    public DateTime TimeCreated { get; set; }
-    public DateTime TimeLastModified { get; set; }
+    public DateTime TimeCreatedInUtc { get; set; }
+    public DateTime TimeLastModifiedInUtc { get; set; }
 }
