@@ -2,7 +2,9 @@
 using CustomersManagement.Application.Contracts.Identity;
 using CustomersManagement.Application.Models.Identity;
 using CustomersManagement.Identity.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace CustomersManagement.Identity.Services;
 
@@ -10,14 +12,19 @@ public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IMapper _mapper;
+    private readonly IHttpContextAccessor _contextAccessor;
 
     public UserService(
         UserManager<ApplicationUser> userManager,
-        IMapper mapper)
+        IMapper mapper,
+        IHttpContextAccessor httpContextAccessor)
     {
         _userManager = userManager;
         _mapper = mapper;
+        _contextAccessor = httpContextAccessor;
     }
+
+    public string UserId { get => _contextAccessor.HttpContext?.User?.FindFirstValue("uid"); }
 
     public async Task<List<Employee>> GetEmployees()
     {
