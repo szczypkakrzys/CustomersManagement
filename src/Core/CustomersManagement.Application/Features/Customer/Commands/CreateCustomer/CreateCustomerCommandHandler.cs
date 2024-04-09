@@ -27,12 +27,14 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
         CancellationToken cancellationToken)
     {
         var validator = new CreateCustomerCommandValidator(_customerRepository);
-        var validtionResult = await validator.ValidateAsync(request);
+        var validationResult = await validator.ValidateAsync(request);
 
-        if (validtionResult.Errors.Any())
+        if (validationResult.Errors.Any())
         {
-            _logger.LogWarning("Validation erros in create request for {0}", nameof(Customer));
-            throw new BadRequestException("Invalid Customer", validtionResult);
+            _logger.LogError("Validation erros in create request for {Customer}: {Errors}", nameof(Customer), validationResult.Errors);
+            throw new BadRequestException("Invalid Customer", validationResult);
+            // TODO
+            //consider better handling exceptions on UI
         }
 
         var customerToCreate = _mapper.Map<Domain.Customer>(request);

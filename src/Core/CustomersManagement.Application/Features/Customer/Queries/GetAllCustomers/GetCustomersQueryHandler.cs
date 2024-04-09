@@ -29,7 +29,6 @@ public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, List<
 
         var data = _mapper.Map<List<CustomerDto>>(customer);
 
-        _logger.LogInformation("All customers were retrieved successfullly");
         return data;
     }
 }

@@ -18,6 +18,9 @@ public class BaseHttpService
 
     protected Response<Guid> ConvertApiExceptions<Guid>(ApiException ex)
     {
+        //TODO
+        //make this more customizable - eg when record already exists in db, we can return more meaningful message :)
+        //since everything is fine on API side, just UI handling needs some work 
         if (ex.StatusCode == 400)
         {
             return new Response<Guid>() { Message = "Invalid data was submitted", VadlidationErros = ex.Response, IsSuccess = false };

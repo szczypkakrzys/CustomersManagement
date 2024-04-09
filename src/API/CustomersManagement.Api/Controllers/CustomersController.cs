@@ -21,23 +21,20 @@ public class CustomersController : ControllerBase
         _mediator = mediator;
     }
 
-    // GET: api/<UsersController>
     [HttpGet]
-    public async Task<List<CustomerDto>> Get()
+    public async Task<ActionResult<List<CustomerDto>>> Get()
     {
         var customers = await _mediator.Send(new GetCustomersQuery());
-        return customers;
+        return Ok(customers);
     }
 
-    // GET api/<UsersController>/5
     [HttpGet("{id}")]
-    public async Task<CustomerDetailsDto> Get(int id)
+    public async Task<ActionResult<CustomerDetailsDto>> Get(int id)
     {
         var customerDetails = await _mediator.Send(new GetCustomerDetailsQuery(id));
-        return customerDetails;
+        return Ok(customerDetails);
     }
 
-    // POST api/<UsersController>
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
@@ -46,10 +43,10 @@ public class CustomersController : ControllerBase
     public async Task<IActionResult> Post(CreateCustomerCommand customer)
     {
         var response = await _mediator.Send(customer);
+        //add response that already exists !!!!
         return CreatedAtAction(nameof(Get), new { id = response });
     }
 
-    // PUT api/<UsersController>/5
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -57,11 +54,10 @@ public class CustomersController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<IActionResult> Put(UpdateCustomerCommand customer)
     {
-        var response = await _mediator.Send(customer);
+        var response = await _mediator.Send(customer); //should put return sth ???
         return NoContent();
     }
 
-    // DELETE api/<UsersController>/5
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

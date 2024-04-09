@@ -31,7 +31,7 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
 
         if (validationResult.Errors.Any())
         {
-            _logger.LogWarning("Validation erros in update request for {0} - {1}", nameof(Customer), request.Id);
+            _logger.LogError("Validation erros in update request for {Customer} - {Id}: {Errors}", nameof(Customer), request.Id, validationResult.Errors);
             throw new BadRequestException("Invalid customer data", validationResult);
         }
 
