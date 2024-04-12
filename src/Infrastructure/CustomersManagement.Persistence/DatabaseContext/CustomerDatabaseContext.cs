@@ -38,6 +38,11 @@ public class CustomerDatabaseContext : DbContext
                 entry.Entity.TimeCreatedInUtc = DateTime.UtcNow;
                 entry.Entity.CreatedBy = _userService.UserId;
             }
+            else
+            {
+                entry.Property(nameof(BaseEntity.TimeCreatedInUtc)).IsModified = false;
+                entry.Property(nameof(BaseEntity.CreatedBy)).IsModified = false;
+            }
         }
 
         return base.SaveChangesAsync(cancellationToken);

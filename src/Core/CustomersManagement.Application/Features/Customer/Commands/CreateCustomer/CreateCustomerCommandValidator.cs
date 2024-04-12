@@ -10,18 +10,22 @@ public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCo
     public CreateCustomerCommandValidator(ICustomerRepository customerRepository)
     {
         RuleFor(p => p.FirstName)
-            .NotEmpty().WithMessage("{PropertyName} is required");
+            .NotEmpty()
+                .WithMessage("{PropertyName} is required");
 
         RuleFor(p => p.LastName)
-           .NotEmpty().WithMessage("{PropertyName} is required");
+            .NotEmpty()
+                .WithMessage("{PropertyName} is required");
 
         RuleFor(p => p.EmailAddress)
-           .NotEmpty().WithMessage("{PropertyName} is required")
-           .EmailAddress().WithMessage("{PropertyValue} is not a valid Email");
+            .NotEmpty()
+                .WithMessage("{PropertyName} is required")
+            .EmailAddress()
+                .WithMessage("{PropertyValue} is not a valid Email");
 
         RuleFor(q => q)
             .MustAsync(CustomerDataUnique)
-            .WithMessage("Given customer already exists");
+                .WithMessage("Given customer already exists");
 
         _customerRepository = customerRepository;
     }

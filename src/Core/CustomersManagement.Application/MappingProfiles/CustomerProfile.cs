@@ -12,9 +12,26 @@ namespace CustomersManagement.Application.MappingProfiles
         public CustomerProfile()
         {
             CreateMap<Customer, CustomerDto>();
-            CreateMap<CustomerDetailsDto, Customer>().ReverseMap();
-            CreateMap<CreateCustomerCommand, Customer>();
-            CreateMap<UpdateCustomerCommand, Customer>();
+            CreateMap<Customer, CustomerDetailsDto>();
+
+            CreateMap<CustomerDetailsDto, Customer>()
+                .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.TimeLastModifiedInUtc, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<CreateCustomerCommand, Customer>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.TimeLastModifiedInUtc, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<UpdateCustomerCommand, Customer>()
+                .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.TimeLastModifiedInUtc, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
         }
     }
 }

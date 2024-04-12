@@ -11,21 +11,27 @@ public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCo
     {
         RuleFor(p => p.Id)
             .NotEmpty()
-            .MustAsync(CustomerMustExist);
+                .WithMessage("{PropertyName} is required")
+            .MustAsync(CustomerMustExist)
+                .WithMessage("Couldn't find customer with Id = {PropertyValue}");
 
         RuleFor(p => p.FirstName)
-          .NotEmpty().WithMessage("{PropertyName} is required");
+            .NotEmpty()
+                .WithMessage("{PropertyName} is required");
 
         RuleFor(p => p.LastName)
-           .NotEmpty().WithMessage("{PropertyName} is required");
+            .NotEmpty()
+                .WithMessage("{PropertyName} is required");
 
         RuleFor(p => p.EmailAddress)
-           .NotEmpty().WithMessage("{PropertyName} is required")
-                      .EmailAddress().WithMessage("{PropertyValue} is not a valid Email");
+            .NotEmpty()
+                .WithMessage("{PropertyName} is required")
+            .EmailAddress()
+                .WithMessage("{PropertyValue} is not a valid Email");
 
         RuleFor(q => q)
             .MustAsync(CustomerDataUnique)
-            .WithMessage("Given customer already exists");
+                .WithMessage("Given customer already exists");
 
         _customerRepository = customerRepository;
     }
