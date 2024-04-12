@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CustomersManagement.Application.Contracts.Logging;
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
 using CustomersManagement.Application.Features.Customer.Commands.UpdateCustomer;
@@ -14,7 +13,6 @@ public class UpdateCustomerTests
 {
     private readonly IMapper _mapper;
     private readonly ICustomerRepository _customerRepository;
-    private readonly IAppLogger<UpdateCustomerCommandHandler> _logger;
     private readonly UpdateCustomerCommandValidator _validator;
     private readonly UpdateCustomerCommandHandler _handler;
 
@@ -22,9 +20,8 @@ public class UpdateCustomerTests
     {
         _mapper = Substitute.For<IMapper>();
         _customerRepository = Substitute.For<ICustomerRepository>();
-        _logger = Substitute.For<IAppLogger<UpdateCustomerCommandHandler>>();
         _validator = new UpdateCustomerCommandValidator(_customerRepository);
-        _handler = new UpdateCustomerCommandHandler(_mapper, _customerRepository, _logger);
+        _handler = new UpdateCustomerCommandHandler(_mapper, _customerRepository);
     }
 
     [Fact]

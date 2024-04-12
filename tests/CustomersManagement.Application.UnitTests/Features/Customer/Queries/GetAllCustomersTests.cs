@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CustomersManagement.Application.Contracts.Logging;
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Features.Customer.Queries.GetAllCustomers;
 using FluentAssertions;
@@ -13,14 +12,12 @@ public class GetAllCustomersTests
     private readonly ICustomerRepository _customerRepository;
     private readonly IMapper _mapper;
     private readonly GetCustomersQueryHandler _handler;
-    private readonly IAppLogger<GetCustomersQueryHandler> _logger;
 
     public GetAllCustomersTests()
     {
         _customerRepository = Substitute.For<ICustomerRepository>();
         _mapper = Substitute.For<IMapper>();
-        _logger = Substitute.For<IAppLogger<GetCustomersQueryHandler>>();
-        _handler = new GetCustomersQueryHandler(_mapper, _customerRepository, _logger);
+        _handler = new GetCustomersQueryHandler(_mapper, _customerRepository);
     }
 
     [Fact]

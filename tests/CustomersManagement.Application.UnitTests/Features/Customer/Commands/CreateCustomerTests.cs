@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CustomersManagement.Application.Contracts.Logging;
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
 using CustomersManagement.Application.Features.Customer.Commands.CreateCustomer;
@@ -15,15 +14,13 @@ public class CreateCustomerTests
     private readonly ICustomerRepository _customerRepository;
     private readonly CreateCustomerCommandValidator _validator;
     private readonly IMapper _mapper;
-    private readonly IAppLogger<CreateCustomerCommandHandler> _logger;
     private readonly CreateCustomerCommandHandler _handler;
 
     public CreateCustomerTests()
     {
         _customerRepository = Substitute.For<ICustomerRepository>();
         _mapper = Substitute.For<IMapper>();
-        _logger = Substitute.For<IAppLogger<CreateCustomerCommandHandler>>();
-        _handler = new CreateCustomerCommandHandler(_mapper, _customerRepository, _logger);
+        _handler = new CreateCustomerCommandHandler(_mapper, _customerRepository);
         _validator = new CreateCustomerCommandValidator(_customerRepository);
     }
 

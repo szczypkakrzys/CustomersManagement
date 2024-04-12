@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CustomersManagement.Application.Contracts.Logging;
 using CustomersManagement.Application.Contracts.Persistence;
 using MediatR;
 
@@ -9,16 +8,13 @@ public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, List<
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly IMapper _mapper;
-    private readonly IAppLogger<GetCustomersQueryHandler> _logger;
 
     public GetCustomersQueryHandler(
         IMapper mapper,
-        ICustomerRepository customerRepository,
-        IAppLogger<GetCustomersQueryHandler> logger)
+        ICustomerRepository customerRepository)
     {
         _mapper = mapper;
         _customerRepository = customerRepository;
-        _logger = logger;
     }
 
     public async Task<List<CustomerDto>> Handle(

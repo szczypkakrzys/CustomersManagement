@@ -43,7 +43,6 @@ public class CustomersController : ControllerBase
     public async Task<IActionResult> Post(CreateCustomerCommand customer)
     {
         var response = await _mediator.Send(customer);
-        //add response that already exists !!!!
         return CreatedAtAction(nameof(Get), new { id = response });
     }
 
@@ -54,7 +53,7 @@ public class CustomersController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<IActionResult> Put(UpdateCustomerCommand customer)
     {
-        var response = await _mediator.Send(customer); //should put return sth ???
+        await _mediator.Send(customer);
         return NoContent();
     }
 

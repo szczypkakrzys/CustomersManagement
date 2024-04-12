@@ -3,6 +3,8 @@ using Microsoft.Extensions.Logging;
 
 namespace CustomersManagement.Infrastructure.Logging;
 
+//TODO
+//is this wrapper neccessary
 public class LoggerAdapter<T> : IAppLogger<T>
 {
     private readonly ILogger<T> _logger;
