@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
+using CustomersManagement.Domain.TravelAgency;
 using MediatR;
 
 namespace CustomersManagement.Application.Features.Customer.Commands.CreateCustomer;
@@ -8,11 +9,11 @@ namespace CustomersManagement.Application.Features.Customer.Commands.CreateCusto
 public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, int>
 {
     private readonly IMapper _mapper;
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
 
     public CreateCustomerCommandHandler(
         IMapper mapper,
-        ICustomerRepository customerRepository)
+        ITravelAgencyCustomerRepository customerRepository)
     {
         _mapper = mapper;
         _customerRepository = customerRepository;
@@ -28,7 +29,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
         if (validationResult.Errors.Count != 0)
             throw new BadRequestException("Invalid Customer", validationResult);
 
-        var customerToCreate = _mapper.Map<Domain.Customer>(request);
+        var customerToCreate = _mapper.Map<TravelAgencyCustomer>(request);
 
         await _customerRepository.CreateAsync(customerToCreate);
 

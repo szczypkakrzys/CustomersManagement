@@ -4,6 +4,7 @@ using CustomersManagement.Application.Features.Customer.Commands.UpdateCustomer;
 using CustomersManagement.Application.Features.Customer.Queries.GetAllCustomers;
 using CustomersManagement.Application.Features.Customer.Queries.GetCustomerDetails;
 using CustomersManagement.Application.MappingProfiles;
+using CustomersManagement.Domain.TravelAgency;
 using System.Runtime.CompilerServices;
 
 namespace CustomersManagement.Application.UnitTests.Mappings;
@@ -30,11 +31,11 @@ public class MappingTests
     }
 
     [Theory]
-    [InlineData(typeof(Domain.Customer), typeof(CustomerDto))]
-    [InlineData(typeof(Domain.Customer), typeof(CustomerDetailsDto))]
-    [InlineData(typeof(CustomerDetailsDto), typeof(Domain.Customer))]
-    [InlineData(typeof(CreateCustomerCommand), typeof(Domain.Customer))]
-    [InlineData(typeof(UpdateCustomerCommand), typeof(Domain.Customer))]
+    [InlineData(typeof(TravelAgencyCustomer), typeof(CustomerDto))]
+    [InlineData(typeof(TravelAgencyCustomer), typeof(CustomerDetailsDto))]
+    [InlineData(typeof(CustomerDetailsDto), typeof(TravelAgencyCustomer))]
+    [InlineData(typeof(CreateCustomerCommand), typeof(TravelAgencyCustomer))]
+    [InlineData(typeof(UpdateCustomerCommand), typeof(TravelAgencyCustomer))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         var instance = GetInstanceOf(source);

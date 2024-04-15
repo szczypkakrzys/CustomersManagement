@@ -2,6 +2,7 @@
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
 using CustomersManagement.Application.Features.Customer.Commands.UpdateCustomer;
+using CustomersManagement.Domain.TravelAgency;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 using MediatR;
@@ -12,14 +13,14 @@ namespace CustomersManagement.Application.UnitTests.Features.Customer.Commands;
 public class UpdateCustomerTests
 {
     private readonly IMapper _mapper;
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
     private readonly UpdateCustomerCommandValidator _validator;
     private readonly UpdateCustomerCommandHandler _handler;
 
     public UpdateCustomerTests()
     {
         _mapper = Substitute.For<IMapper>();
-        _customerRepository = Substitute.For<ICustomerRepository>();
+        _customerRepository = Substitute.For<ITravelAgencyCustomerRepository>();
         _validator = new UpdateCustomerCommandValidator(_customerRepository);
         _handler = new UpdateCustomerCommandHandler(_mapper, _customerRepository);
     }
@@ -37,12 +38,12 @@ public class UpdateCustomerTests
             EmailAddress = "test@customer.com"
         };
 
-        var customerToUpdate = new Domain.Customer();
+        var customerToUpdate = new TravelAgencyCustomer();
 
         _customerRepository.IsCustomerUnique(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(true);
         _customerRepository.GetByIdAsync(customerId).Returns(customerToUpdate);
         _customerRepository.UpdateAsync(customerToUpdate).Returns(Task.CompletedTask);
-        _mapper.Map<Domain.Customer>(request).Returns(customerToUpdate);
+        _mapper.Map<TravelAgencyCustomer>(request).Returns(customerToUpdate);
 
         // Act
         var result = await _handler.Handle(request, CancellationToken.None);
@@ -64,9 +65,9 @@ public class UpdateCustomerTests
             EmailAddress = "test@customer.com"
         };
 
-        var customerToUpdate = new Domain.Customer();
+        var customerToUpdate = new TravelAgencyCustomer();
 
-        _customerRepository.GetByIdAsync(customerId).Returns(default(Domain.Customer));
+        _customerRepository.GetByIdAsync(customerId).Returns(default(TravelAgencyCustomer));
 
         // Act
         var result = await _validator.TestValidateAsync(request);
@@ -76,7 +77,7 @@ public class UpdateCustomerTests
         await act.Should().ThrowAsync<BadRequestException>()
            .WithMessage("Invalid customer data");
 
-        await _customerRepository.DidNotReceive().UpdateAsync(Arg.Any<Domain.Customer>());
+        await _customerRepository.DidNotReceive().UpdateAsync(Arg.Any<TravelAgencyCustomer>());
 
         result.ShouldHaveValidationErrorFor(request => request.Id)
             .WithErrorMessage($"Couldn't find customer with Id = {request.Id}");
@@ -96,7 +97,7 @@ public class UpdateCustomerTests
         await act.Should().ThrowAsync<BadRequestException>()
            .WithMessage("Invalid customer data");
 
-        await _customerRepository.DidNotReceive().UpdateAsync(Arg.Any<Domain.Customer>());
+        await _customerRepository.DidNotReceive().UpdateAsync(Arg.Any<TravelAgencyCustomer>());
 
         result.ShouldHaveValidationErrorFor(request => request.Id)
             .WithErrorMessage("Id is required");
@@ -121,7 +122,7 @@ public class UpdateCustomerTests
             EmailAddress = "testcustomercom"
         };
 
-        var customerToUpdate = new Domain.Customer();
+        var customerToUpdate = new TravelAgencyCustomer();
 
         _customerRepository.IsCustomerUnique(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(true);
         _customerRepository.GetByIdAsync(customerId).Returns(customerToUpdate);
@@ -134,7 +135,7 @@ public class UpdateCustomerTests
         await act.Should().ThrowAsync<BadRequestException>()
            .WithMessage("Invalid customer data");
 
-        await _customerRepository.DidNotReceive().UpdateAsync(Arg.Any<Domain.Customer>());
+        await _customerRepository.DidNotReceive().UpdateAsync(Arg.Any<TravelAgencyCustomer>());
 
         result.ShouldHaveValidationErrorFor(request => request.EmailAddress)
             .WithErrorMessage($"{request.EmailAddress} is not a valid Email");

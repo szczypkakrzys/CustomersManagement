@@ -5,9 +5,9 @@ namespace CustomersManagement.Application.Features.Customer.Commands.CreateCusto
 
 public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
 
-    public CreateCustomerCommandValidator(ICustomerRepository customerRepository)
+    public CreateCustomerCommandValidator(ITravelAgencyCustomerRepository customerRepository)
     {
         RuleFor(p => p.FirstName)
             .NotEmpty()

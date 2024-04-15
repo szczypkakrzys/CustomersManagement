@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
+using CustomersManagement.Domain.TravelAgency;
 using MediatR;
 
 namespace CustomersManagement.Application.Features.Customer.Commands.UpdateCustomer;
@@ -8,11 +9,11 @@ namespace CustomersManagement.Application.Features.Customer.Commands.UpdateCusto
 public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Unit>
 {
     private readonly IMapper _mapper;
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
 
     public UpdateCustomerCommandHandler(
         IMapper mapper,
-        ICustomerRepository customerRepository)
+        ITravelAgencyCustomerRepository customerRepository)
     {
         _mapper = mapper;
         _customerRepository = customerRepository;
@@ -28,7 +29,7 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
         if (validationResult.Errors.Count != 0)
             throw new BadRequestException("Invalid customer data", validationResult);
 
-        var customerToUpdate = _mapper.Map<Domain.Customer>(request);
+        var customerToUpdate = _mapper.Map<TravelAgencyCustomer>(request);
 
         await _customerRepository.UpdateAsync(customerToUpdate);
 

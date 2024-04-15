@@ -7,10 +7,10 @@ namespace CustomersManagement.Application.Features.Customer.Queries.GetCustomerD
 
 public class GetCustomerDetailsQueryHandler : IRequestHandler<GetCustomerDetailsQuery, CustomerDetailsDto>
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
     private readonly IMapper _mapper;
     public GetCustomerDetailsQueryHandler(
-        ICustomerRepository customerRepository,
+        ITravelAgencyCustomerRepository customerRepository,
         IMapper mapper)
     {
         _customerRepository = customerRepository;

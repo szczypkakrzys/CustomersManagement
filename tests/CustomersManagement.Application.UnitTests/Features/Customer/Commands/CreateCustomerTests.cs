@@ -2,6 +2,7 @@
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
 using CustomersManagement.Application.Features.Customer.Commands.CreateCustomer;
+using CustomersManagement.Domain.TravelAgency;
 using FluentAssertions;
 using FluentValidation;
 using FluentValidation.TestHelper;
@@ -11,14 +12,14 @@ namespace CustomersManagement.Application.UnitTests.Features.Customer.Commands;
 
 public class CreateCustomerTests
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
     private readonly CreateCustomerCommandValidator _validator;
     private readonly IMapper _mapper;
     private readonly CreateCustomerCommandHandler _handler;
 
     public CreateCustomerTests()
     {
-        _customerRepository = Substitute.For<ICustomerRepository>();
+        _customerRepository = Substitute.For<ITravelAgencyCustomerRepository>();
         _mapper = Substitute.For<IMapper>();
         _handler = new CreateCustomerCommandHandler(_mapper, _customerRepository);
         _validator = new CreateCustomerCommandValidator(_customerRepository);
@@ -30,7 +31,7 @@ public class CreateCustomerTests
         // Arrange
         _customerRepository.IsCustomerUnique(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(true);
         var customerId = 1;
-        var customerToCreate = new Domain.Customer { Id = customerId };
+        var customerToCreate = new TravelAgencyCustomer { Id = customerId };
 
         var request = new CreateCustomerCommand
         {
@@ -39,7 +40,7 @@ public class CreateCustomerTests
             EmailAddress = "test@customer.com"
         };
 
-        _mapper.Map<Domain.Customer>(request).Returns(customerToCreate);
+        _mapper.Map<TravelAgencyCustomer>(request).Returns(customerToCreate);
         _customerRepository.CreateAsync(customerToCreate).Returns(Task.CompletedTask);
 
         // Act
@@ -63,7 +64,7 @@ public class CreateCustomerTests
         await act.Should().ThrowAsync<BadRequestException>()
             .WithMessage("Invalid Customer");
 
-        await _customerRepository.DidNotReceive().CreateAsync(Arg.Any<Domain.Customer>());
+        await _customerRepository.DidNotReceive().CreateAsync(Arg.Any<TravelAgencyCustomer>());
 
         result.ShouldHaveValidationErrorFor(request => request.FirstName)
             .WithErrorMessage("First Name is required");
@@ -94,7 +95,7 @@ public class CreateCustomerTests
         await act.Should().ThrowAsync<BadRequestException>()
             .WithMessage("Invalid Customer");
 
-        await _customerRepository.DidNotReceive().CreateAsync(Arg.Any<Domain.Customer>());
+        await _customerRepository.DidNotReceive().CreateAsync(Arg.Any<TravelAgencyCustomer>());
 
         result.ShouldHaveValidationErrorFor(request => request.EmailAddress)
             .WithErrorMessage($"{request.EmailAddress} is not a valid Email");
@@ -121,7 +122,7 @@ public class CreateCustomerTests
         await act.Should().ThrowAsync<BadRequestException>()
             .WithMessage("Invalid Customer");
 
-        await _customerRepository.DidNotReceive().CreateAsync(Arg.Any<Domain.Customer>());
+        await _customerRepository.DidNotReceive().CreateAsync(Arg.Any<TravelAgencyCustomer>());
 
         result.ShouldHaveAnyValidationError()
             .WithErrorMessage("Given customer already exists");

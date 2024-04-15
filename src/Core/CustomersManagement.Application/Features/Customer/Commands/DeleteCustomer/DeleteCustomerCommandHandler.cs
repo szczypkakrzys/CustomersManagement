@@ -6,9 +6,9 @@ namespace CustomersManagement.Application.Features.Customer.Commands.DeleteCusto
 
 public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, Unit>
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
 
-    public DeleteCustomerCommandHandler(ICustomerRepository customer) =>
+    public DeleteCustomerCommandHandler(ITravelAgencyCustomerRepository customer) =>
         _customerRepository = customer;
 
     public async Task<Unit> Handle(

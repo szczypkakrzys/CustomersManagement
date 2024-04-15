@@ -6,12 +6,12 @@ namespace CustomersManagement.Application.Features.Customer.Queries.GetAllCustom
 
 public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, List<CustomerDto>>
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
     private readonly IMapper _mapper;
 
     public GetCustomersQueryHandler(
         IMapper mapper,
-        ICustomerRepository customerRepository)
+        ITravelAgencyCustomerRepository customerRepository)
     {
         _mapper = mapper;
         _customerRepository = customerRepository;

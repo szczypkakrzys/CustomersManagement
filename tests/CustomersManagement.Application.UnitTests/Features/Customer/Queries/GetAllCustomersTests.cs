@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Features.Customer.Queries.GetAllCustomers;
+using CustomersManagement.Domain.TravelAgency;
 using FluentAssertions;
 using NSubstitute;
 
@@ -9,13 +10,13 @@ namespace CustomersManagement.Application.UnitTests.Features.Customer.Queries;
 
 public class GetAllCustomersTests
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
     private readonly IMapper _mapper;
     private readonly GetCustomersQueryHandler _handler;
 
     public GetAllCustomersTests()
     {
-        _customerRepository = Substitute.For<ICustomerRepository>();
+        _customerRepository = Substitute.For<ITravelAgencyCustomerRepository>();
         _mapper = Substitute.For<IMapper>();
         _handler = new GetCustomersQueryHandler(_mapper, _customerRepository);
     }
@@ -25,7 +26,7 @@ public class GetAllCustomersTests
     {
         // Arrange
         var request = new GetCustomersQuery();
-        var customers = new List<Domain.Customer>();
+        var customers = new List<TravelAgencyCustomer>();
         var expected = new List<CustomerDto>()
         {
             new()

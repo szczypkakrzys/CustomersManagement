@@ -5,9 +5,9 @@ namespace CustomersManagement.Application.Features.Customer.Commands.UpdateCusto
 
 public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCommand>
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
 
-    public UpdateCustomerCommandValidator(ICustomerRepository customerRepository)
+    public UpdateCustomerCommandValidator(ITravelAgencyCustomerRepository customerRepository)
     {
         RuleFor(p => p.Id)
             .NotEmpty()

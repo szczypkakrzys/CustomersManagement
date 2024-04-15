@@ -1,6 +1,7 @@
 ﻿using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
 using CustomersManagement.Application.Features.Customer.Commands.DeleteCustomer;
+using CustomersManagement.Domain.TravelAgency;
 using FluentAssertions;
 using MediatR;
 using NSubstitute;
@@ -9,12 +10,12 @@ namespace CustomersManagement.Application.UnitTests.Features.Customer.Commands;
 
 public class DeleteCustomerTests
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ITravelAgencyCustomerRepository _customerRepository;
     private readonly DeleteCustomerCommandHandler _handler;
 
     public DeleteCustomerTests()
     {
-        _customerRepository = Substitute.For<ICustomerRepository>();
+        _customerRepository = Substitute.For<ITravelAgencyCustomerRepository>();
         _handler = new DeleteCustomerCommandHandler(_customerRepository);
     }
 
@@ -22,7 +23,7 @@ public class DeleteCustomerTests
     public async Task Handle_ValidRequest_DeletesCustomer()
     {
         // Arrange
-        var customerToDelete = new Domain.Customer();
+        var customerToDelete = new TravelAgencyCustomer();
         var request = new DeleteCustomerCommand
         {
             Id = 1
@@ -42,7 +43,7 @@ public class DeleteCustomerTests
     public async Task Handle_WithNonexistentCustomerId_ThrowsNotFoundException()
     {
         // Arrange
-        _customerRepository.GetByIdAsync(Arg.Any<int>()).Returns(default(Domain.Customer));
+        _customerRepository.GetByIdAsync(Arg.Any<int>()).Returns(default(TravelAgencyCustomer));
         var customerId = 1;
         var request = new DeleteCustomerCommand
         {
@@ -54,6 +55,6 @@ public class DeleteCustomerTests
 
         // Assert
         await act.Should().ThrowAsync<NotFoundException>()
-           .WithMessage($"{nameof(Domain.Customer)} ({request.Id}) was not found");
+           .WithMessage($"{nameof(TravelAgencyCustomer)} ({request.Id}) was not found");
     }
 }
