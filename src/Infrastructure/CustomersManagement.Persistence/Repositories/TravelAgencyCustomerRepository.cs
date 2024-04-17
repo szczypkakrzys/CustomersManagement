@@ -1,4 +1,5 @@
 ﻿using CustomersManagement.Application.Contracts.Persistence;
+using CustomersManagement.Domain;
 using CustomersManagement.Domain.TravelAgency;
 using CustomersManagement.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,43 @@ public class TravelAgencyCustomerRepository : GenericRepository<TravelAgencyCust
 {
     public TravelAgencyCustomerRepository(CustomerDatabaseContext context) : base(context)
     {
+    }
+
+    public async Task<TravelAgencyCustomer> GetByIdAsync(int id)
+    {
+        try
+        {
+            var customer = await _context.Set<TravelAgencyCustomer>().AsNoTracking()
+                      .FirstOrDefaultAsync(q => q.Id == id);
+
+            if (customer != null)
+            {
+                customer.Address = await _context.Set<Address>().AsNoTracking()
+                                         .FirstOrDefaultAsync(q => q.Id == customer.AddressId);
+            }
+
+            return customer;
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+    }
+
+    public new async Task DeleteAsync(TravelAgencyCustomer customer)
+    {
+        _context.Addresses.Remove(customer.Address);
+        _context.Remove(customer);
+        await _context.SaveChangesAsync();
+    }
+
+    public new async Task UpdateAsync(TravelAgencyCustomer customer)
+    {
+        if (await IsDifferentFromDatabaseValue(customer.Address))
+            _context.Entry(customer.Address).State = EntityState.Modified;
+
+        _context.Entry(customer).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
     }
 
     public async Task<bool> IsCustomerUnique(

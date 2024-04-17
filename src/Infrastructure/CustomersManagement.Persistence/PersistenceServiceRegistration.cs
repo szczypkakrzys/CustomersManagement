@@ -19,7 +19,6 @@ public static class PersistenceServiceRegistration
         });
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<IAddressRepository, AddressReposiotry>();
         services.AddScoped<ITravelAgencyCustomerRepository, TravelAgencyCustomerRepository>();
         services.AddScoped<ITourRepository, TourRepository>();
         services.AddScoped<ICustomersToursRelationsRepository, CustomersToursRelationsRepository>();

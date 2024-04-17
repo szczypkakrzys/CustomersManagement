@@ -39,7 +39,43 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 
     public async Task UpdateAsync(T entity)
     {
-        _context.Entry(entity).State = EntityState.Modified; //what if not exists??
+        _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<bool> IsDifferentFromDatabaseValue<TEntity>(TEntity entity) where TEntity : BaseEntity
+    {
+        var entityFromDatabase = await _context.Set<TEntity>().AsNoTracking()
+                .FirstOrDefaultAsync(q => q.Id == entity.Id);
+
+        var excludedProperties = new HashSet<string>
+        {
+            "Id", "TimeCreatedInUtc", "CreatedBy", "TimeLastModifiedInUtc", "LastModifiedBy"
+        };
+
+        if (entityFromDatabase == null)
+        {
+            return true;
+        }
+
+        foreach (var property in typeof(TEntity).GetProperties())
+        {
+            if (excludedProperties.Contains(property.Name))
+                continue;
+
+            var currentValue = property.GetValue(entity);
+
+            if (currentValue == default)
+                continue;
+
+            var databaseValue = property.GetValue(entityFromDatabase);
+
+            if (!Equals(currentValue, databaseValue))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
