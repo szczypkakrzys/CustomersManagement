@@ -12,25 +12,18 @@ public class TravelAgencyCustomerRepository : GenericRepository<TravelAgencyCust
     {
     }
 
-    public async Task<TravelAgencyCustomer> GetByIdAsync(int id)
+    public new async Task<TravelAgencyCustomer?> GetByIdAsync(int id)
     {
-        try
-        {
-            var customer = await _context.Set<TravelAgencyCustomer>().AsNoTracking()
-                      .FirstOrDefaultAsync(q => q.Id == id);
+        var customer = await _context.Set<TravelAgencyCustomer>().AsNoTracking()
+                  .FirstOrDefaultAsync(q => q.Id == id);
 
-            if (customer != null)
-            {
-                customer.Address = await _context.Set<Address>().AsNoTracking()
-                                         .FirstOrDefaultAsync(q => q.Id == customer.AddressId);
-            }
-
-            return customer;
-        }
-        catch (Exception ex)
+        if (customer != null)
         {
-            throw;
+            customer.Address = await _context.Set<Address>().AsNoTracking()
+                                     .FirstOrDefaultAsync(q => q.Id == customer.AddressId);
         }
+
+        return customer;
     }
 
     public new async Task DeleteAsync(TravelAgencyCustomer customer)
