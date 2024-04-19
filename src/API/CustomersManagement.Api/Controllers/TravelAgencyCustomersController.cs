@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cutomers.Api.Controllers;
 
-[Route("api/Customers/TravelAgency")]
+[Route("api/TravelAgency/Customers/")]
 [ApiController]
 [Authorize]
 public class TravelAgencyCustomersController : ControllerBase

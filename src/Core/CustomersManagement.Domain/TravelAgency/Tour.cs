@@ -2,7 +2,7 @@
 
 namespace CustomersManagement.Domain.TravelAgency;
 
-public class Tour : BaseEntity
+public class Tour : CustomerActivity
 {
     public ICollection<TravelAgencyCustomer> Participants { get; set; }
     public ICollection<CustomersToursRelations> TourRelations { get; set; }
