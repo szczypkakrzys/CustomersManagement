@@ -4,6 +4,7 @@ using CustomersManagement.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomersManagement.Persistence.Migrations
 {
     [DbContext(typeof(CustomerDatabaseContext))]
-    partial class CustomerDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240420112157_UpdateForProperCustomerToursRelations")]
+    partial class UpdateForProperCustomerToursRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,11 +82,11 @@ namespace CustomersManagement.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateOnly?>("AdvancedPaymentDate")
-                        .HasColumnType("date");
-
-                    b.Property<int>("AdvancedPaymentLeftToPay")
+                    b.Property<int>("AdvancePaymentCost")
                         .HasColumnType("int");
+
+                    b.Property<DateOnly>("AdvancePaymentDeadline")
+                        .HasColumnType("date");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -94,16 +97,17 @@ namespace CustomersManagement.Persistence.Migrations
                     b.Property<int>("DivingCourseId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("EnrollmentDate")
+                    b.Property<DateOnly>("EntireAmountPaymentDeadline")
                         .HasColumnType("date");
 
-                    b.Property<DateOnly?>("EntireAmountPaymentDate")
-                        .HasColumnType("date");
-
-                    b.Property<int>("EntireCostLeftToPay")
+                    b.Property<int>("EntireCost")
                         .HasColumnType("int");
 
                     b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
@@ -113,8 +117,14 @@ namespace CustomersManagement.Persistence.Migrations
                     b.Property<DateTime>("TimeCreatedInUtc")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateOnly>("TimeEnd")
+                        .HasColumnType("date");
+
                     b.Property<DateTime>("TimeLastModifiedInUtc")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateOnly>("TimeStart")
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
@@ -238,11 +248,11 @@ namespace CustomersManagement.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateOnly?>("AdvancedPaymentDate")
-                        .HasColumnType("date");
-
-                    b.Property<int>("AdvancedPaymentLeftToPay")
+                    b.Property<int>("AdvancePaymentCost")
                         .HasColumnType("int");
+
+                    b.Property<DateOnly>("AdvancePaymentDeadline")
+                        .HasColumnType("date");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -250,16 +260,17 @@ namespace CustomersManagement.Persistence.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("EnrollmentDate")
+                    b.Property<DateOnly>("EntireAmountPaymentDeadline")
                         .HasColumnType("date");
 
-                    b.Property<DateOnly?>("EntireAmountPaymentDate")
-                        .HasColumnType("date");
-
-                    b.Property<int>("EntireCostLeftToPay")
+                    b.Property<int>("EntireCost")
                         .HasColumnType("int");
 
                     b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
@@ -269,8 +280,14 @@ namespace CustomersManagement.Persistence.Migrations
                     b.Property<DateTime>("TimeCreatedInUtc")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateOnly>("TimeEnd")
+                        .HasColumnType("date");
+
                     b.Property<DateTime>("TimeLastModifiedInUtc")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateOnly>("TimeStart")
+                        .HasColumnType("date");
 
                     b.Property<int>("TourId")
                         .HasColumnType("int");

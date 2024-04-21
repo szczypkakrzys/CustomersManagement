@@ -2,7 +2,7 @@
 
 namespace CustomersManagement.Domain.DivingSchool;
 
-public class CustomersDivingCoursesRelations : CustomerActivity
+public class CustomersDivingCoursesRelations : CustomersActivitiesRelations
 {
     public int CustomerId { get; set; }
     public DivingSchoolCustomer Customer { get; set; }

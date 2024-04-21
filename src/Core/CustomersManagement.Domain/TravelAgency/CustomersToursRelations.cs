@@ -2,7 +2,7 @@
 
 namespace CustomersManagement.Domain.TravelAgency;
 
-public class CustomersToursRelations : CustomerActivity
+public class CustomersToursRelations : CustomersActivitiesRelations
 {
     public int CustomerId { get; set; }
     public TravelAgencyCustomer Customer { get; set; }

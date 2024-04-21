@@ -1,6 +1,7 @@
 ﻿using CustomersManagement.Application.Features.Tours.Commands.CreateTour;
 using CustomersManagement.Application.Features.Tours.Commands.DeleteTour;
 using CustomersManagement.Application.Features.Tours.Commands.UpdateTour;
+using CustomersManagement.Application.Features.Tours.Queries.GetAllTourParticipants;
 using CustomersManagement.Application.Features.Tours.Queries.GetAllTours;
 using CustomersManagement.Application.Features.Tours.Queries.GetTourDetails;
 using MediatR;
@@ -67,5 +68,12 @@ public class ToursController : Controller
         var command = new DeleteTourCommand { Id = id };
         await _mediator.Send(command);
         return NoContent();
+    }
+
+    [HttpGet("{id}/participants")]
+    public async Task<IActionResult> GetTourParticipants(int id)
+    {
+        var participants = await _mediator.Send(new GetTourParticipantsQuery(id));
+        return Ok(participants);
     }
 }

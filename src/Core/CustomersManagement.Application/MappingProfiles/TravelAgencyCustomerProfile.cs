@@ -5,6 +5,8 @@ using CustomersManagement.Application.Features.Customer.Queries.GetAllCustomers;
 using CustomersManagement.Application.Features.Customer.Queries.GetCustomerDetails;
 using CustomersManagement.Application.Features.Shared;
 using CustomersManagement.Application.Features.TravelAgencyCustomer.Commands.CreateTravelAgencyCustomer;
+using CustomersManagement.Application.Features.TravelAgencyCustomer.Queries.GetAllCustomerTours;
+using CustomersManagement.Application.Features.TravelAgencyCustomer.Queries.GetCustomerTourDetails;
 using CustomersManagement.Application.MappingProfiles.Customs;
 using CustomersManagement.Domain;
 using CustomersManagement.Domain.TravelAgency;
@@ -21,7 +23,6 @@ public class TravelAgencyCustomerProfile : Profile
 
         CreateMap<TravelAgencyCustomerDetailsDto, TravelAgencyCustomer>()
             .ForMember(dest => dest.Tours, opt => opt.Ignore())
-            .ForMember(dest => dest.ToursRelations, opt => opt.Ignore())
             .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
             .ForMember(dest => dest.TimeLastModifiedInUtc, opt => opt.Ignore())
@@ -30,7 +31,6 @@ public class TravelAgencyCustomerProfile : Profile
         CreateMap<CreateTravelAgencyCustomerCommand, TravelAgencyCustomer>()
             .ForMember(dest => dest.AddressId, opt => opt.Ignore())
             .ForMember(dest => dest.Tours, opt => opt.Ignore())
-            .ForMember(dest => dest.ToursRelations, opt => opt.Ignore())
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
@@ -39,7 +39,6 @@ public class TravelAgencyCustomerProfile : Profile
 
         CreateMap<UpdateTravelAgencyCustomerCommand, TravelAgencyCustomer>()
             .ForMember(dest => dest.Tours, opt => opt.Ignore())
-            .ForMember(dest => dest.ToursRelations, opt => opt.Ignore())
             .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
             .ForMember(dest => dest.TimeLastModifiedInUtc, opt => opt.Ignore())
@@ -65,5 +64,8 @@ public class TravelAgencyCustomerProfile : Profile
             .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
             .ForMember(dest => dest.TimeLastModifiedInUtc, opt => opt.Ignore())
             .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+        CreateMap<Tour, CustomerTourDto>();
+        CreateMap<CustomersToursRelations, CustomerTourDetailsDto>();
     }
 }

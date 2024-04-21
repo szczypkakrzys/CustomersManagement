@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CustomersManagement.Application.Features.Tours.Commands.CreateTour;
 using CustomersManagement.Application.Features.Tours.Commands.UpdateTour;
+using CustomersManagement.Application.Features.Tours.Queries.GetAllTourParticipants;
 using CustomersManagement.Application.Features.Tours.Queries.GetAllTours;
 using CustomersManagement.Application.Features.Tours.Queries.GetTourDetails;
 using CustomersManagement.Domain.TravelAgency;
@@ -13,7 +14,6 @@ public class TourProfile : Profile
     {
         CreateMap<CreateTourCommand, Tour>()
             .ForMember(dest => dest.Participants, opt => opt.Ignore())
-            .ForMember(dest => dest.TourRelations, opt => opt.Ignore())
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
@@ -22,7 +22,6 @@ public class TourProfile : Profile
 
         CreateMap<UpdateTourCommand, Tour>()
             .ForMember(dest => dest.Participants, opt => opt.Ignore())
-            .ForMember(dest => dest.TourRelations, opt => opt.Ignore())
             .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
             .ForMember(dest => dest.TimeLastModifiedInUtc, opt => opt.Ignore())
@@ -30,5 +29,6 @@ public class TourProfile : Profile
 
         CreateMap<Tour, TourDto>();
         CreateMap<Tour, TourDetailsDto>();
+        CreateMap<TravelAgencyCustomer, TourParticipantDto>();
     }
 }

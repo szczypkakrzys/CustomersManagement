@@ -1,5 +1,4 @@
 ﻿using CustomersManagement.Application.Contracts.Persistence;
-using CustomersManagement.Domain;
 using CustomersManagement.Domain.TravelAgency;
 using CustomersManagement.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -14,14 +13,18 @@ public class TravelAgencyCustomerRepository : GenericRepository<TravelAgencyCust
 
     public new async Task<TravelAgencyCustomer?> GetByIdAsync(int id)
     {
-        var customer = await _context.Set<TravelAgencyCustomer>().AsNoTracking()
-                  .FirstOrDefaultAsync(q => q.Id == id);
+        return await _context.Set<TravelAgencyCustomer>()
+                            .Include(p => p.Address)
+                            .AsNoTracking()
+                            .FirstOrDefaultAsync(q => q.Id == id);
+    }
 
-        if (customer != null)
-        {
-            customer.Address = await _context.Set<Address>().AsNoTracking()
-                                     .FirstOrDefaultAsync(q => q.Id == customer.AddressId);
-        }
+    public async Task<TravelAgencyCustomer> GetByIdWithTours(int id)
+    {
+        var customer = await _context.Set<TravelAgencyCustomer>()
+                                    .Include(p => p.Tours)
+                                    .AsNoTracking()
+                                    .FirstOrDefaultAsync(q => q.Id == id);
 
         return customer;
     }

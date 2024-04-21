@@ -3,6 +3,11 @@ using CustomersManagement.Application.Features.Customer.Commands.DeleteCustomer;
 using CustomersManagement.Application.Features.Customer.Commands.UpdateCustomer;
 using CustomersManagement.Application.Features.Customer.Queries.GetAllCustomers;
 using CustomersManagement.Application.Features.Customer.Queries.GetCustomerDetails;
+using CustomersManagement.Application.Features.TravelAgencyCustomer.Commands.AssignCustomerToTour;
+using CustomersManagement.Application.Features.TravelAgencyCustomer.Commands.RemoveCustomerFromTour;
+using CustomersManagement.Application.Features.TravelAgencyCustomer.Commands.UpdateCustomerPayment;
+using CustomersManagement.Application.Features.TravelAgencyCustomer.Queries.GetAllCustomerTours;
+using CustomersManagement.Application.Features.TravelAgencyCustomer.Queries.GetCustomerTourDetails;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -65,6 +70,40 @@ public class TravelAgencyCustomersController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var command = new DeleteTravelAgencyCustomerCommand { Id = id };
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+    [HttpGet("{id}/tours")]
+    public async Task<ActionResult<IEnumerable<CustomerTourDto>>> GetAllCustomerTours(int id)
+    {
+        var customerTours = await _mediator.Send(new GetCustomerToursQuery(id));
+        return Ok(customerTours);
+    }
+
+    [HttpGet("{id}/tour/{tourId}")]
+    public async Task<IActionResult> GetCustomerTourDetails(int id, int tourId)
+    {
+        var customerTourDetails = await _mediator.Send(new GetCustomerTourDetailsQuery(id, tourId));
+        return Ok(customerTourDetails);
+    }
+
+    [HttpPost("{id}/tour/{tourId}")]
+    public async Task<IActionResult> AssignCustomerToTour(AssignCustomerCommand command)
+    {
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+    [HttpPut("{id}/tour/{tourId}/payment")]
+    public async Task<IActionResult> UpdateCustomerPayment(UpdateCustomerTourPaymentCommand command)
+    {
+        throw new NotImplementedException();
+    }
+
+    [HttpDelete("{id}/tour/{tourId}/")]
+    public async Task<IActionResult> RemoveCustomerFromTour(RemoveCustomerFromTourCommand command)
+    {
         await _mediator.Send(command);
         return NoContent();
     }
