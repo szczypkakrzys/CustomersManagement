@@ -1,18 +1,18 @@
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models.Customers;
+using CustomersManagement.UI.Models.TravelAgencyCustomers;
 using Microsoft.AspNetCore.Components;
 
-namespace CustomersManagement.UI.Pages.Customers;
+namespace CustomersManagement.UI.Pages.TravelAgencyCustomers;
 
 public partial class Details
 {
     [Inject]
-    ICustomerService Customer { get; set; }
+    ITravelAgencyCustomerService Customer { get; set; }
 
     [Parameter]
     public int Id { get; set; }
 
-    CustomerVM customer = new();
+    TravelAgencyCustomerDetailsVM customer = new();
 
     protected override async Task OnParametersSetAsync()
     {

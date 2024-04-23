@@ -1,13 +1,13 @@
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models.Customers;
+using CustomersManagement.UI.Models.TravelAgencyCustomers;
 using Microsoft.AspNetCore.Components;
 
-namespace CustomersManagement.UI.Pages.Customers;
+namespace CustomersManagement.UI.Pages.TravelAgencyCustomers;
 
 public partial class Edit
 {
     [Inject]
-    ICustomerService Customer { get; set; }
+    ITravelAgencyCustomerService Customer { get; set; }
 
     [Inject]
     NavigationManager NavManager { get; set; }
@@ -16,7 +16,7 @@ public partial class Edit
     public int Id { get; set; }
     public string Message { get; private set; }
 
-    CustomerVM Model = new();
+    TravelAgencyCustomerDetailsVM Model = new();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -28,7 +28,7 @@ public partial class Edit
         var response = await Customer.UpdateCustomer(Id, Model);
         if (response.IsSuccess)
         {
-            NavManager.NavigateTo("/customers/");
+            NavManager.NavigateTo("/travelagency/customers/");
         }
         Message = response.Message;
     }

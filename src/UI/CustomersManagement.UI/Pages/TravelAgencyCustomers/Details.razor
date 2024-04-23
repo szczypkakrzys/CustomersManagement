@@ -1,0 +1,54 @@
+﻿@page "/travelagency/customers/details/{id:int}"
+
+
+
+@if (customer == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Customer Information</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID:</dt>
+                <dd class="col-sm-9">@customer.Id</dd>
+
+                <dt class="col-sm-3">Imię:</dt>
+                <dd class="col-sm-9">@customer.FirstName</dd>
+
+                <dt class="col-sm-3">Nazwisko:</dt>
+                <dd class="col-sm-9">@customer.LastName</dd>
+
+                <dt class="col-sm-3">Adres e-mail:</dt>
+                <dd class="col-sm-9">@customer.EmailAddress</dd>
+
+                <dt class="col-sm-3">Numer telefonu:</dt>
+                <dd class="col-sm-9">@customer.PhoneNumber</dd>
+
+                <dt class="col-sm-3">Data urodzin:</dt>
+                <dd class="col-sm-9">@customer.DateOfBirth.ToShortDateString()</dd>
+
+                @if(customer.Address != null)
+                {
+                    <dt class="col-sm-3">Addres:</dt>
+                        <dd class="col-sm-9">
+                            <address>
+                                @customer.Address.Street<br />
+                                @customer.Address.HouseNumber<br />
+                                @customer.Address.City<br />
+                                @customer.Address.PostalCode<br />
+                                @customer.Address.Voivodeship<br />
+                                @customer.Address.Country
+                            </address>
+                        </dd>
+                }
+            </dl>
+        </div>
+    </div>
+}
+
+

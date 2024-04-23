@@ -1,4 +1,4 @@
-﻿@page "/customers/"
+﻿@page "/travelagency/customers/"
 
 <h3>Klienci</h3>
 
@@ -33,6 +33,9 @@ else
                     Nazwisko
                 </th>
                 <th>
+                    E-mail
+                </th>
+                <th>
                     Akcje
                 </th>
             </tr>
@@ -45,6 +48,7 @@ else
                     <td>@customer.Id</td>
                     <td>@customer.FirstName</td>
                     <td>@customer.LastName</td>
+                    <td>@customer.EmailAddress</td>
                     <td>
                         <button @onclick="@(() => EditCustomer(customer.Id))" class="btn btn-warning">Edytuj</button>
                         <button @onclick="@(() => CustomerDetails(customer.Id))" class="btn btn-info">Szczegóły</button>

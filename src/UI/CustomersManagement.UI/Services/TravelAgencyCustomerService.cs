@@ -1,16 +1,17 @@
 ﻿using AutoMapper;
 using Blazored.LocalStorage;
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models.Customers;
+using CustomersManagement.UI.Models.Shared;
+using CustomersManagement.UI.Models.TravelAgencyCustomers;
 using CustomersManagement.UI.Services.Base;
 
 namespace CustomersManagement.UI.Services;
 
-public class CustomerService : BaseHttpService, ICustomerService
+public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustomerService
 {
     private readonly IMapper _mapper;
 
-    public CustomerService(
+    public TravelAgencyCustomerService(
         IClient client,
         IMapper mapper,
         ILocalStorageService localStorageService) : base(client, localStorageService)
@@ -18,12 +19,12 @@ public class CustomerService : BaseHttpService, ICustomerService
         _mapper = mapper;
     }
 
-    public async Task<Response<Guid>> CreateCustomer(CustomerVM customer)
+    public async Task<Response<Guid>> CreateCustomer(TravelAgencyCustomerDetailsVM customer)
     {
         try
         {
             await AddBearerToken();
-            var createCustomerCommand = _mapper.Map<CreateCustomerCommand>(customer);
+            var createCustomerCommand = _mapper.Map<CreateTravelAgencyCustomerCommand>(customer);
             await _client.CustomersPOSTAsync(createCustomerCommand);
             return new Response<Guid>() { IsSuccess = true };
         }
@@ -54,19 +55,19 @@ public class CustomerService : BaseHttpService, ICustomerService
         return _mapper.Map<List<CustomerVM>>(customers);
     }
 
-    public async Task<CustomerVM> GetCustomerDetails(int id)
+    public async Task<TravelAgencyCustomerDetailsVM> GetCustomerDetails(int id)
     {
         await AddBearerToken();
         var customer = await _client.CustomersGETAsync(id);
-        return _mapper.Map<CustomerVM>(customer);
+        return _mapper.Map<TravelAgencyCustomerDetailsVM>(customer);
     }
 
-    public async Task<Response<Guid>> UpdateCustomer(int id, CustomerVM customer)
+    public async Task<Response<Guid>> UpdateCustomer(int id, TravelAgencyCustomerDetailsVM customer)
     {
         try
         {
             await AddBearerToken();
-            var updateCustomerCommand = _mapper.Map<UpdateCustomerCommand>(customer);
+            var updateCustomerCommand = _mapper.Map<UpdateTravelAgencyCustomerCommand>(customer);
             await _client.CustomersPUTAsync(id.ToString(), updateCustomerCommand);
             return new Response<Guid>() { IsSuccess = true };
         }

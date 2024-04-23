@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CustomersManagement.UI.Models.Customers;
+namespace CustomersManagement.UI.Models.Shared;
 
 public class CustomerVM
 {

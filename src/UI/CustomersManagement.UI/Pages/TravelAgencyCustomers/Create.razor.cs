@@ -1,8 +1,9 @@
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models.Customers;
+using CustomersManagement.UI.Models.Shared;
+using CustomersManagement.UI.Models.TravelAgencyCustomers;
 using Microsoft.AspNetCore.Components;
 
-namespace CustomersManagement.UI.Pages.Customers;
+namespace CustomersManagement.UI.Pages.TravelAgencyCustomers;
 
 public partial class Create
 {
@@ -10,18 +11,21 @@ public partial class Create
     public NavigationManager NavManager { get; set; }
 
     [Inject]
-    public ICustomerService Customer { get; set; }
+    public ITravelAgencyCustomerService Customer { get; set; }
 
     public string Message { get; set; } = string.Empty;
 
-    public CustomerVM Model = new();
+    public TravelAgencyCustomerDetailsVM Model { get; set; } = new TravelAgencyCustomerDetailsVM
+    {
+        Address = new AddressVM()
+    };
 
     async Task CreateCustomer()
     {
         var response = await Customer.CreateCustomer(Model);
         if (response.IsSuccess)
         {
-            NavManager.NavigateTo("/customers/");
+            NavManager.NavigateTo("/travelagency/customers/");
         }
         Message = response.Message;
     }
