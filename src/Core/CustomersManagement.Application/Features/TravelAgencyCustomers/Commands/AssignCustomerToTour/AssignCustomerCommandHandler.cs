@@ -42,7 +42,6 @@ public class AssignCustomerCommandHandler : IRequestHandler<AssignCustomerComman
             CustomerId = request.CustomerId,
             TourId = request.TourId,
             EnrollmentDate = DateOnly.FromDateTime(DateTime.Now),
-            Status = "unknown",
             AdvancedPaymentDate = null,
             EntireAmountPaymentDate = null,
             AdvancedPaymentLeftToPay = tourDetails.AdvancePaymentCost,

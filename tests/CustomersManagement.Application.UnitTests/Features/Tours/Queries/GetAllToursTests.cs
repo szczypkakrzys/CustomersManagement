@@ -33,15 +33,15 @@ public class GetAllToursTests
             {
                 Id = 1,
                 Name = "TestTour",
-                TimeStart = date,
-                TimeEnd = date.AddDays(1)
+                TimeStart = date.ToString(),
+                TimeEnd = date.AddDays(1).ToString(),
             },
             new()
             {
                 Id = 2,
                 Name = "TestTour2",
-                TimeStart = date,
-                TimeEnd = date.AddDays(1)
+                TimeStart = date.ToString(),
+                TimeEnd = date.AddDays(1).ToString()
             }
         };
 

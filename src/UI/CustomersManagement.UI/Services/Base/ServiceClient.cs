@@ -2105,10 +2105,10 @@ namespace CustomersManagement.UI.Services.Base
         public System.DateTimeOffset TimeEnd { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("entireCost")]
-        public int EntireCost { get; set; }
+        public double EntireCost { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("advancePaymentCost")]
-        public int AdvancePaymentCost { get; set; }
+        public double AdvancePaymentCost { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("entireAmountPaymentDeadline")]
         public System.DateTimeOffset EntireAmountPaymentDeadline { get; set; }
@@ -2155,9 +2155,6 @@ namespace CustomersManagement.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("enrollmentDate")]
         public string EnrollmentDate { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("status")]
-        public string Status { get; set; }
-
         [System.Text.Json.Serialization.JsonPropertyName("advancedPaymentDate")]
         public string AdvancedPaymentDate { get; set; }
 
@@ -2165,10 +2162,10 @@ namespace CustomersManagement.UI.Services.Base
         public string EntireAmountPaymentDate { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("advancedPaymentLeftToPay")]
-        public int AdvancedPaymentLeftToPay { get; set; }
+        public double AdvancedPaymentLeftToPay { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("entireCostLeftToPay")]
-        public int EntireCostLeftToPay { get; set; }
+        public double EntireCostLeftToPay { get; set; }
 
     }
 
@@ -2284,10 +2281,10 @@ namespace CustomersManagement.UI.Services.Base
         public string TimeEnd { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("entireCost")]
-        public int EntireCost { get; set; }
+        public double EntireCost { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("advancePaymentCost")]
-        public int AdvancePaymentCost { get; set; }
+        public double AdvancePaymentCost { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("entireAmountPaymentDeadline")]
         public string EntireAmountPaymentDeadline { get; set; }
@@ -2389,7 +2386,7 @@ namespace CustomersManagement.UI.Services.Base
         public int TourId { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("paymentAmount")]
-        public int PaymentAmount { get; set; }
+        public double PaymentAmount { get; set; }
 
     }
 
@@ -2410,10 +2407,10 @@ namespace CustomersManagement.UI.Services.Base
         public System.DateTimeOffset TimeEnd { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("entireCost")]
-        public int EntireCost { get; set; }
+        public double EntireCost { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("advancePaymentCost")]
-        public int AdvancePaymentCost { get; set; }
+        public double AdvancePaymentCost { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("entireAmountPaymentDeadline")]
         public System.DateTimeOffset EntireAmountPaymentDeadline { get; set; }

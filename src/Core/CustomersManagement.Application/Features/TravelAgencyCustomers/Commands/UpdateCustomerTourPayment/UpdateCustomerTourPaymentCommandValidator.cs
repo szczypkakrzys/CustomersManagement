@@ -4,7 +4,7 @@ namespace CustomersManagement.Application.Features.TravelAgencyCustomers.Command
 
 public class UpdateCustomerTourPaymentCommandValidator : AbstractValidator<UpdateCustomerTourPaymentCommand>
 {
-    public UpdateCustomerTourPaymentCommandValidator(int entireCostLeftToPay)
+    public UpdateCustomerTourPaymentCommandValidator(double entireCostLeftToPay)
     {
         RuleFor(p => p.CustomerId)
             .NotEmpty()

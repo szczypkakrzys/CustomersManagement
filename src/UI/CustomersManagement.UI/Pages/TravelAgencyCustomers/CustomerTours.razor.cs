@@ -109,7 +109,7 @@ public partial class CustomerTours
         paymentModalVisible = true;
     }
 
-    protected async Task AddPayment(int customerId, int tourId, int paymentAmount)
+    protected async Task AddPayment(int customerId, int tourId, double paymentAmount)
     {
         var response = await CustomerService.UpdateCustomerPayment(
             customerId,

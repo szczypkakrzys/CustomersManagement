@@ -218,7 +218,7 @@ else
            Resizable="@false"
            OkText="@("Dodaj")"
            CancelText="@("Anuluj")"
-           OnOk="@(() => AddPayment(customer.Id, modalTourId, (int)newPaymentValue))"
+           OnOk="@(() => AddPayment(customer.Id, modalTourId, newPaymentValue))"
            Centered="true">
         Podaj kwotę wpłaty <AntDesign.InputNumber Step="0.1" Min="0" Max="@customerTourDetails.EntireCostLeftToPay" @bind-Value="newPaymentValue" /> zł
     </Modal>

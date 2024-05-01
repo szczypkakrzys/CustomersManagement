@@ -6,7 +6,7 @@ public class PaymentService
 {
     public static CustomersToursRelations RelationAfterPayment(
         CustomersToursRelations relation,
-        int paymentAmount)
+        double paymentAmount)
     {
         var (entireCostLeft, advancedPaymentLeft) = CalculatePayment(
                                                 paymentAmount,
@@ -24,10 +24,10 @@ public class PaymentService
         return relation;
     }
 
-    private static (int entireCostLeft, int advancedPaymentLeft) CalculatePayment(
-        int paymentAmount,
-        int entireCostLeft,
-        int advancedPaymentLeft)
+    private static (double entireCostLeft, double advancedPaymentLeft) CalculatePayment(
+        double paymentAmount,
+        double entireCostLeft,
+        double advancedPaymentLeft)
     {
         if (paymentAmount == entireCostLeft)
         {

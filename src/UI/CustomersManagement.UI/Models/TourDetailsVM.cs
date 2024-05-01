@@ -16,10 +16,10 @@ public class TourDetailsVM
     public DateTime TimeEnd { get; set; }
 
     [Required(ErrorMessage = "Całkowiy koszt jest wymagany")]
-    public int EntireCost { get; set; }
+    public double EntireCost { get; set; }
 
     [Required(ErrorMessage = "Koszt zaliczki jest wymagany")]
-    public int AdvancePaymentCost { get; set; }
+    public double AdvancePaymentCost { get; set; }
 
     [Required(ErrorMessage = "Termin wpłaty jest wymagany")]
     public DateTime EntireAmountPaymentDeadline { get; set; }

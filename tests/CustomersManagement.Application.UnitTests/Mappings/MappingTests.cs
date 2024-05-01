@@ -40,7 +40,6 @@ public class MappingTests
     [Theory]
     [InlineData(typeof(TravelAgencyCustomer), typeof(TravelAgencyCustomerDto))]
     [InlineData(typeof(TravelAgencyCustomer), typeof(TravelAgencyCustomerDetailsDto))]
-    [InlineData(typeof(TravelAgencyCustomerDetailsDto), typeof(TravelAgencyCustomer))]
     [InlineData(typeof(CreateTravelAgencyCustomerCommand), typeof(TravelAgencyCustomer))]
     [InlineData(typeof(UpdateTravelAgencyCustomerCommand), typeof(TravelAgencyCustomer))]
     [InlineData(typeof(DateTime), typeof(DateOnly))]

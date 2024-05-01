@@ -14,6 +14,6 @@ public interface ITravelAgencyCustomerService
     Task<List<CustomerTourVM>> GetCustomerTours(int id);
     Task<Response<Guid>> AssignCustomerToTour(int customerId, int tourId);
     Task<CustomerTourDetailsVM> CustomerTourDetails(int customerId, int tourId);
-    Task<Response<Guid>> UpdateCustomerPayment(int customerId, int tourId, int paymentAmount);
+    Task<Response<Guid>> UpdateCustomerPayment(int customerId, int tourId, double paymentAmount);
     Task<Response<Guid>> RemoveCustomerFromTour(int customerId, int tourId);
 }

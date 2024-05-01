@@ -6,5 +6,5 @@ public class UpdateCustomerTourPaymentCommand : IRequest<Unit>
 {
     public int CustomerId { get; set; }
     public int TourId { get; set; }
-    public int PaymentAmount { get; set; }
+    public double PaymentAmount { get; set; }
 }

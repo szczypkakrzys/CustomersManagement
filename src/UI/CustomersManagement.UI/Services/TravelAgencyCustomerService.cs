@@ -110,7 +110,7 @@ public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustome
         return _mapper.Map<CustomerTourDetailsVM>(customer);
     }
 
-    public async Task<Response<Guid>> UpdateCustomerPayment(int customerId, int tourId, int paymentAmount)
+    public async Task<Response<Guid>> UpdateCustomerPayment(int customerId, int tourId, double paymentAmount)
     {
         try
         {

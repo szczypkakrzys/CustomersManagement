@@ -14,6 +14,7 @@ public class TourProfile : Profile
     {
         CreateMap<CreateTourCommand, Tour>()
             .ForMember(dest => dest.Participants, opt => opt.Ignore())
+            .ForMember(dest => dest.TourRelations, opt => opt.Ignore())
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
@@ -22,6 +23,7 @@ public class TourProfile : Profile
 
         CreateMap<UpdateTourCommand, Tour>()
             .ForMember(dest => dest.Participants, opt => opt.Ignore())
+            .ForMember(dest => dest.TourRelations, opt => opt.Ignore())
             .ForMember(dest => dest.TimeCreatedInUtc, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
             .ForMember(dest => dest.TimeLastModifiedInUtc, opt => opt.Ignore())

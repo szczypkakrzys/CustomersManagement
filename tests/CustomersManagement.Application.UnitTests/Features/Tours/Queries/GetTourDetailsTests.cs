@@ -33,13 +33,12 @@ public class GetTourDetailsTests
         {
             Id = tourId,
             Name = "TestTour",
-            TimeStart = date,
-            TimeEnd = date.AddDays(5),
+            TimeStart = date.ToString(),
+            TimeEnd = date.AddDays(5).ToString(),
             EntireCost = 500,
             AdvancePaymentCost = 150,
-            EntireAmountPaymentDeadline = date.AddDays(3),
-            AdvancePaymentDeadline = date.AddDays(-1),
-            Status = "unknow"
+            EntireAmountPaymentDeadline = date.AddDays(3).ToString(),
+            AdvancePaymentDeadline = date.AddDays(-1).ToString(),
         };
 
         _tourRepository.GetByIdAsync(tourId).Returns(tourDetails);
