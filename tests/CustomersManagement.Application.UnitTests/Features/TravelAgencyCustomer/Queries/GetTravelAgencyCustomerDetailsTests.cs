@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
-using CustomersManagement.Application.Features.Customer.Queries.GetCustomerDetails;
+using CustomersManagement.Application.Features.TravelAgencyCustomers.Queries.GetTravelAgencyCustomerDetails;
 using CustomersManagement.Domain.TravelAgency;
 using FluentAssertions;
 using NSubstitute;

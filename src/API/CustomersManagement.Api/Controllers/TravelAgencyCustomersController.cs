@@ -82,13 +82,17 @@ public class TravelAgencyCustomersController : ControllerBase
     }
 
     [HttpGet("{id}/tour/{tourId}")]
-    public async Task<IActionResult> GetCustomerTourDetails(int id, int tourId)
+    public async Task<ActionResult<CustomerTourDetailsDto>> GetCustomerTourDetails(int id, int tourId)
     {
         var customerTourDetails = await _mediator.Send(new GetCustomerTourDetailsQuery(id, tourId));
         return Ok(customerTourDetails);
     }
 
     [HttpPost("{id}/tour/{tourId}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<IActionResult> AssignCustomerToTour(AssignCustomerCommand command)
     {
         await _mediator.Send(command);
@@ -96,12 +100,21 @@ public class TravelAgencyCustomersController : ControllerBase
     }
 
     [HttpPut("{id}/tour/{tourId}/payment")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<IActionResult> UpdateCustomerPayment(UpdateCustomerTourPaymentCommand command)
     {
-        throw new NotImplementedException();
+        await _mediator.Send(command);
+        return NoContent();
     }
 
     [HttpDelete("{id}/tour/{tourId}/")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
     public async Task<IActionResult> RemoveCustomerFromTour(RemoveCustomerFromTourCommand command)
     {
         await _mediator.Send(command);

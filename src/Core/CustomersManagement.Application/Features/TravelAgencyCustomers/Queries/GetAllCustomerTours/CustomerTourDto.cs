@@ -4,6 +4,6 @@ public class CustomerTourDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public DateOnly TimeStart { get; set; }
-    public DateOnly TimeEnd { get; set; }
+    public string TimeStart { get; set; }
+    public string TimeEnd { get; set; }
 }

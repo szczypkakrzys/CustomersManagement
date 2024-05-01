@@ -15,4 +15,10 @@ public class CustomerVM
     [Required(ErrorMessage = "Adres e-mail jest wymagany")]
     [EmailAddress(ErrorMessage = "Podany adres e-mail nie jest w poprawnym formacie")]
     public string EmailAddress { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "Numer telefonu jest wymagany")]
+    public string PhoneNumber { get; set; }
+
+    [Required(ErrorMessage = "Data urodzin jest wymagana")]
+    public DateTime DateOfBirth { get; set; }
 }

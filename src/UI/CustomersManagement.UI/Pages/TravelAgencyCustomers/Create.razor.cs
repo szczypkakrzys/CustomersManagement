@@ -1,6 +1,7 @@
+using AntDesign;
 using CustomersManagement.UI.Contracts;
+using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Models.Shared;
-using CustomersManagement.UI.Models.TravelAgencyCustomers;
 using Microsoft.AspNetCore.Components;
 
 namespace CustomersManagement.UI.Pages.TravelAgencyCustomers;
@@ -12,6 +13,9 @@ public partial class Create
 
     [Inject]
     public ITravelAgencyCustomerService Customer { get; set; }
+
+    [Inject]
+    IMessageService _message { get; set; }
 
     public string Message { get; set; } = string.Empty;
 
@@ -26,7 +30,12 @@ public partial class Create
         if (response.IsSuccess)
         {
             NavManager.NavigateTo("/travelagency/customers/");
+            _message.Success("Poprawnie dodano nowego klienta");
         }
-        Message = response.Message;
+        else
+        {
+            Message = response.Message;
+            _message.Error("Nie uda³o siê dodaæ klienta");
+        }
     }
 }

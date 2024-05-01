@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CustomersManagement.Application.Contracts.Persistence;
-using CustomersManagement.Application.Features.Customer.Queries.GetAllCustomers;
+using CustomersManagement.Application.Features.TravelAgencyCustomers.Queries.GetAllTravelAgencyCustomers;
 using CustomersManagement.Domain.TravelAgency;
 using FluentAssertions;
 using NSubstitute;

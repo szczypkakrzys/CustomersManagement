@@ -3,12 +3,12 @@ using CustomersManagement.UI.Contracts;
 using CustomersManagement.UI.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace CustomersManagement.UI.Pages.TravelAgencyCustomers;
+namespace CustomersManagement.UI.Pages.Tours;
 
 public partial class Edit
 {
     [Inject]
-    ITravelAgencyCustomerService Customer { get; set; }
+    ITourService Tour { get; set; }
 
     [Inject]
     NavigationManager NavManager { get; set; }
@@ -20,25 +20,25 @@ public partial class Edit
     public int Id { get; set; }
     public string Message { get; private set; }
 
-    TravelAgencyCustomerDetailsVM Model = new();
+    TourDetailsVM Model = new();
 
     protected override async Task OnParametersSetAsync()
     {
-        Model = await Customer.GetCustomerDetails(Id);
+        Model = await Tour.GetTourDetails(Id);
     }
 
-    private async Task UpdateCustomer()
+    private async Task UpdateTour()
     {
-        var response = await Customer.UpdateCustomer(Id, Model);
+        var response = await Tour.UpdateTour(Id, Model);
         if (response.IsSuccess)
         {
-            NavManager.NavigateTo("/travelagency/customers/");
-            _message.Success("Poprawnie zaaktualizowano dane klienta");
+            NavManager.NavigateTo("/travelagency/tours/");
+            _message.Success("Poprawnie zaaktualizowano dane wycieczki");
         }
         else
         {
             Message = response.Message;
-            _message.Error("Nie uda³o siê edytowaæ danych klienta");
+            _message.Error("Nie uda³o siê edytowaæ danych wycieczki");
         }
     }
 }

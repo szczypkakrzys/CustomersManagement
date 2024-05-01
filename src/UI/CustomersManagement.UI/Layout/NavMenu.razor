@@ -1,69 +1,84 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">CustomersManagement.UI</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿<nav class="flex-column" style="height: 100%">
+    <Menu 
+        Theme="MenuTheme.Dark"
+        DefaultSelectedKeys=@(new[] { "1" })
+        DefaultOpenKeys=@(new[] { "sub1" })
+        Mode=@MenuMode.Inline
+        Style="height: 100%; background-color: blu">
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
+        <Title Level="4" Style="color: white; margin-top: 5%; margin-bottom: 5% ;text-align: center;"><Icon Type="global" Theme="outline" /> Podróżujący nurek</Title>
 
-        <AuthorizeView>
-            <Authorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="travelagency/customers/">
-                        <span class="bi bi-file-person-nav-menu" aria-hidden="true"></span> Customers
-                    </NavLink>
-                </div>
-                <div style="position: absolute; bottom: 20px;">
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link">
-                            <span class="oi oi-person" aria-hidden="true"></span>@context.User?.Identity?.Name
-                        </NavLink>
-                    </div>
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="logout">
-                            <span class="oi oi-arrow-circle-left" aria-hidden="true"></span> Log Out
-                        </NavLink>
-                    </div>
-                </div>
-            </Authorized>
-        </AuthorizeView>
-   
-        <AuthorizeView Roles="Administrator">
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="register">
-                    <span class="oi oi-person" aria-hidden="true"></span> Register new user
-                </NavLink>
-            </div>
-        </AuthorizeView>
+         <AuthorizeView>
 
-        <AuthorizeView>
             <NotAuthorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="login">
-                        <span class="oi oi-person" aria-hidden="true"></span> Login
-                    </NavLink>
-                </div>
+                <MenuItem Icon="login">
+                    Login
+                </MenuItem>
             </NotAuthorized>
+
+             <Authorized>
+
+                <MenuItem Key="1" Icon="desktop" RouterLink="" Style="font-size: 16px">
+                    Menu
+                </MenuItem>
+
+                <MenuItem Key="2" Icon="bell" Style="font-size: 16px">
+                   Powiadomienia
+                </MenuItem>
+
+                <SubMenu Key="sub1" TitleTemplate=@sub1Title Style="font-size: 16px">
+                    <MenuItem Key="3" Icon="team" RouterLink="travelagency/customers/" Style="font-size: 16px">
+                        Klienci
+                    </MenuItem>
+                    <MenuItem Key="4" Icon="compass" RouterLink="travelagency/tours/" Style="font-size: 16px">
+                        Wycieczki
+                    </MenuItem>
+                </SubMenu>
+
+                <SubMenu Key="sub2" TitleTemplate=@sub2Title Style="font-size: 16px">
+                    <MenuItem Key="5" Icon="team" RouterLink="divingschool/customers/" Style="font-size: 16px">
+                        Klienci
+                    </MenuItem>
+                    <MenuItem Key="6" Icon="schedule" RouterLink="divingschool/courses/" Style="font-size: 16px">
+                        Kursy
+                    </MenuItem>
+                </SubMenu>
+
+             </Authorized>
+         </AuthorizeView>
+
+        <AuthorizeView Roles="Administrator">
+            <MenuItem Key="7" Icon="customer-service" Style="font-size: 16px">
+                Pracownicy
+            </MenuItem>
         </AuthorizeView>
-    </nav>
-</div>
 
-@code {
-    private bool collapseNavMenu = true;
+        <div style="position: absolute; bottom: 20px; width: 100%">
+            <AuthorizeView>
+                <Authorized>
+                    <MenuItem Key="8" Icon="setting" Style=" font-size: 16px;" Class="dupa">
+                        Moje konto
+                    </MenuItem>
+                    <MenuItem Key="9" Icon="logout" Style=" font-size: 16px;" RouterLink="logout" Class="dupa">
+                        Wyloguj
+                    </MenuItem>
+                </Authorized>
+            </AuthorizeView>
+        </div>
+    </Menu>
+</nav>
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+@code
+{
+    RenderFragment sub1Title =
+    @<span>
+        <Icon Type="mail" Theme="outline"></Icon>
+        <span>Biuro podróży</span>
+    </span>;
 
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
+    RenderFragment sub2Title =
+    @<span>
+        <Icon Type="appstore" Theme="outline"></Icon>
+        <span>Szkoła nurkowania</span>
+    </span>;
 }

@@ -1,6 +1,6 @@
-﻿namespace CustomersManagement.Application.Features.TravelAgencyCustomers.Queries.GetCustomerTourDetails;
+﻿namespace CustomersManagement.UI.Models;
 
-public class CustomerTourDetailsDto
+public class CustomerTourDetailsVM
 {
     public int Id { get; set; }
     public string EnrollmentDate { get; set; }

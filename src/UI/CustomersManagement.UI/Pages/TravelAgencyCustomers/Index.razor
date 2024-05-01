@@ -2,9 +2,6 @@
 
 <h3>Klienci</h3>
 
-<div class="m-2 d-flex justify-content-end">
-    <button @onclick="CreateCustomer" class="btn btn-success">Dodaj klienta</button>
-</div>
 
 @if(string.IsNullOrEmpty(Message) == false)
 {
@@ -19,46 +16,55 @@
 }
 else
 {
-    <table class="table">
+    <GridRow>
+        <GridCol Span="8">
+            <Search Placeholder="Wyszukaj"  ClassicSearchIcon @bind-Value="SearchText" BindOnInput="true" Size="large"/>
+        </GridCol>
+        <GridCol Span="8">
+            <Button Type="@ButtonType.Primary" Size="@ButtonSize.Large" OnClick="CreateCustomer" Style="margin-left: 10%">
+                Dodaj klienta
+            </Button>
+        </GridCol>
+    </GridRow>
 
-        <thead>
+<table class="table" style="margin-top: 10px">
+    <thead>
+        <tr>
+            <th>
+                Imię
+            </th>
+            <th>
+                Nazwisko
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th>
+                Akcje
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var customer in FilteredCustomers)
+        {
             <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Imię
-                </th>
-                <th>
-                    Nazwisko
-                </th>
-                <th>
-                    E-mail
-                </th>
-                <th>
-                    Akcje
-                </th>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.EmailAddress</td>
+                <td>
+                        <Button Type="@ButtonType.Primary" Size="@ButtonSize.Large" OnClick="@(() => CustomerTours(customer.Id))">
+                            Zarządzaj wycieczkami
+                        </Button>
+                        <Button Type="@ButtonType.Default" Size="@ButtonSize.Large" OnClick="@(() => CustomerDetails(customer.Id))">
+                            Szczegóły
+                        </Button>
+                </td>
             </tr>
-        </thead>
+        }
+    </tbody>
 
-        <tbody>
-            @foreach(var customer in Customers)
-            {
-                <tr>
-                    <td>@customer.Id</td>
-                    <td>@customer.FirstName</td>
-                    <td>@customer.LastName</td>
-                    <td>@customer.EmailAddress</td>
-                    <td>
-                        <button @onclick="@(() => EditCustomer(customer.Id))" class="btn btn-warning">Edytuj</button>
-                        <button @onclick="@(() => CustomerDetails(customer.Id))" class="btn btn-info">Szczegóły</button>
-                        <button @onclick="@(() => DeleteCustomer(customer.Id))" class="btn btn-danger">Usuń</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-
-    </table>
+</table>
 }
 
 

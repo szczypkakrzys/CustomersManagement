@@ -1,7 +1,7 @@
 ﻿@page "/travelagency/customers/create"
 
-<h3>Nowy klient</h3>
-
+<div style="margin: auto">
+    <Title Level="2" Style="margin-left: 5%">Nowy klient</Title>
 @if (string.IsNullOrEmpty(Message) == false)
 {
     <div class="alert alert-danger">
@@ -9,65 +9,49 @@
     </div>
 }
 
-<div class="row">
-    <div class="col-md-4">
-        <EditForm Model="@Model" OnValidSubmit="CreateCustomer">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label">First Name</label>
-                <InputText id="FirstName" class="form-control" @bind-Value="@Model.FirstName"></InputText>
-                <ValidationMessage For="@(() => Model.FirstName)" ShowValidationMessage="true" />
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label">Last Name</label>
-                <InputText id="LastName" class="form-control" @bind-Value="@Model.LastName"></InputText>
-                <ValidationMessage For="@(() => Model.LastName)" ShowValidationMessage="true" />
-            </div>
-            <div class="form-group">
-                <label asp-for="EmailAddress" class="control-label">Email Address</label>
-                <InputText id="EmailAddress" class="form-control" @bind-Value="@Model.EmailAddress"></InputText>
-                <ValidationMessage For="@(() => Model.EmailAddress)" ShowValidationMessage="true" />
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label">Numer telefonu</label>
-                <InputText id="PhoneNumber" class="form-control" @bind-Value="@Model.PhoneNumber"></InputText>
-                <ValidationMessage For="@(() => Model.PhoneNumber)" ShowValidationMessage="true" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Country" class="control-label">Kraj</label>
-                <InputText id="Country" class="form-control" @bind-Value="@Model.Address.Country"></InputText>
-                <ValidationMessage For="@(() => Model.Address.Country)" ShowValidationMessage="true" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Voivodeship" class="control-label">Województwo</label>
-                <InputText id="Voivodeship" class="form-control" @bind-Value="@Model.Address.Voivodeship"></InputText>
-                <ValidationMessage For="@(() => Model.Address.Voivodeship)" ShowValidationMessage="true" />
-            </div>
-            <div class="form-group">
-                <label asp-for="PostalCode" class="control-label">Kod pocztowy</label>
-                <InputText id="PostalCode" class="form-control" @bind-Value="@Model.Address.PostalCode"></InputText>
-                <ValidationMessage For="@(() => Model.Address.PostalCode)" ShowValidationMessage="true" />
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label">Miasto</label>
-                <InputText id="City" class="form-control" @bind-Value="@Model.Address.City"></InputText>
-                <ValidationMessage For="@(() => Model.Address.City)" ShowValidationMessage="true" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Street" class="control-label">Ulica</label>
-                <InputText id="Street" class="form-control" @bind-Value="@Model.Address.Street"></InputText>
-                <ValidationMessage For="@(() => Model.Address.Street)" ShowValidationMessage="true" />
-            </div>
-            <div class="form-group">
-                <label asp-for="HouseNumber" class="control-label">Number budynku/mieszkania</label>
-                <InputText id="HouseNumber" class="form-control" @bind-Value="@Model.Address.HouseNumber"></InputText>
-                <ValidationMessage For="@(() => Model.Address.HouseNumber)" ShowValidationMessage="true" />
-            </div> 
-            <div class="form-group">
-                <input type="submit" value="Create Customer" class="btn btn-primary" />
-            </div>
-        </EditForm>
-    </div>
+<Form Model="@Model"
+      LabelCol="new ColLayoutParam { Span = 5 }"
+      WrapperCol="new ColLayoutParam { Span = 5 }"
+      OnFinish="CreateCustomer"
+    ValidateOnChange = "true">
+    <FormItem Label="Imię">
+        <Input @bind-Value="@Model.FirstName" />
+    </FormItem>
+    <FormItem Label="Nazwisko">
+        <Input @bind-Value="@Model.LastName" />
+    </FormItem>
+    <FormItem Label="Adres e-mail">
+        <Input @bind-Value="@Model.EmailAddress" />
+    </FormItem>
+    <FormItem Label="Data urodzenia">
+            <DatePicker Size="large" Format="dd/MM/yyyy" Mask="dd/MM/yyyy" Placeholder="@("dd/mm/yyyy")" Class="form-control" DefaultValue="DateTime.Today" @bind-Value="@Model.DateOfBirth" />
+    </FormItem>
+    <FormItem Label="Numer telefonu">
+        <Input @bind-Value="@Model.PhoneNumber" />
+    </FormItem>
+    <FormItem Label="Kraj">
+        <Input @bind-Value="@Model.Address.Country" />
+    </FormItem>
+    <FormItem Label="Województwo">
+        <Input @bind-Value="@Model.Address.Voivodeship" />
+    </FormItem>
+    <FormItem Label="Kod pocztowy">
+        <Input @bind-Value="@Model.Address.PostalCode" />
+    </FormItem>
+    <FormItem Label="Miasto">
+        <Input @bind-Value="@Model.Address.City" />
+    </FormItem>
+    <FormItem Label="Ulica">
+        <Input @bind-Value="@Model.Address.Street" />
+    </FormItem>
+    <FormItem Label="Number budynku/mieszkania">
+        <Input @bind-Value="@Model.Address.HouseNumber" />
+    </FormItem>
+   
+    <FormItem WrapperCol="new ColLayoutParam{ Offset = 5, Span = 16 }">
+        <Button Type="@ButtonType.Primary" HtmlType="submit">
+            Dodaj klienta
+        </Button>
+    </FormItem>
+</Form>
 </div>

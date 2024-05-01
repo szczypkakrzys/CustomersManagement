@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
-using CustomersManagement.Application.Features.Customer.Commands.CreateCustomer;
-using CustomersManagement.Application.Features.TravelAgencyCustomer.Commands.CreateTravelAgencyCustomer;
+using CustomersManagement.Application.Features.TravelAgencyCustomers.Commands.CreateTravelAgencyCustomer;
 using CustomersManagement.Domain.TravelAgency;
 using FluentAssertions;
 using FluentValidation;

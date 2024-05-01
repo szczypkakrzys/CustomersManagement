@@ -1,6 +1,6 @@
 ﻿using CustomersManagement.Application.Contracts.Persistence;
 using CustomersManagement.Application.Exceptions;
-using CustomersManagement.Application.Features.Customer.Commands.DeleteCustomer;
+using CustomersManagement.Application.Features.TravelAgencyCustomers.Commands.DeleteTravelAgencyCustomer;
 using CustomersManagement.Domain.TravelAgency;
 using FluentAssertions;
 using MediatR;

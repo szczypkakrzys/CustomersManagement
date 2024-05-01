@@ -71,7 +71,7 @@ public class ToursController : Controller
     }
 
     [HttpGet("{id}/participants")]
-    public async Task<IActionResult> GetTourParticipants(int id)
+    public async Task<ActionResult<IEnumerable<TourParticipantDto>>> GetTourParticipants(int id)
     {
         var participants = await _mediator.Send(new GetTourParticipantsQuery(id));
         return Ok(participants);

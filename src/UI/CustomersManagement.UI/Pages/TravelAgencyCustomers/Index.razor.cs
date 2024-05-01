@@ -14,7 +14,9 @@ public partial class Index
 
     public List<CustomerVM> Customers { get; private set; }
     public string Message { get; set; } = string.Empty;
-
+    public string SearchText = "";
+    List<CustomerVM> FilteredCustomers => Customers.Where(
+            customer => (customer.FirstName + " " + customer.LastName + customer.EmailAddress).Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)).ToList();
     protected override async Task OnInitializedAsync()
     {
         await LoadCustomers();
@@ -25,27 +27,9 @@ public partial class Index
         NavManager.NavigateTo("/travelagency/customers/create/");
     }
 
-    protected void EditCustomer(int id)
-    {
-        NavManager.NavigateTo($"/travelagency/customers/edit/{id}");
-    }
-
     protected void CustomerDetails(int id)
     {
         NavManager.NavigateTo($"/travelagency/customers/details/{id}");
-    }
-
-    protected async Task DeleteCustomer(int id)
-    {
-        var response = await Customer.DeleteCustomer(id);
-        if (response.IsSuccess)
-        {
-            await LoadCustomers();
-        }
-        else
-        {
-            Message = response.Message;
-        }
     }
 
     protected async Task LoadCustomers()
@@ -53,4 +37,8 @@ public partial class Index
         Customers = await Customer.GetAllCustomers();
     }
 
+    protected void CustomerTours(int id)
+    {
+        NavManager.NavigateTo($"/travelagency/customers/{id}/tours");
+    }
 }
