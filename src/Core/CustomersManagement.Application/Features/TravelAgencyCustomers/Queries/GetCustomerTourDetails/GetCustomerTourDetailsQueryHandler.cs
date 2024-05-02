@@ -22,8 +22,8 @@ public class GetCustomerTourDetailsQueryHandler : IRequestHandler<GetCustomerTou
         GetCustomerTourDetailsQuery request,
         CancellationToken cancellationToken)
     {
-        var details = await _relationsRepository.GetCustomerTourDetails(request.CustomerId, request.TourId) ??
-             throw new NotFoundException($"Relation with customerId: {request.CustomerId} and tourId:", request.TourId);
+        var details = await _relationsRepository.GetCustomerTourDetails(request.customerId, request.tourId) ??
+             throw new NotFoundException($"Relation with customerId: {request.customerId} and tourId:", request.tourId);
 
         var data = _mapper.Map<CustomerTourDetailsDto>(details);
 

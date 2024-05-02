@@ -1,5 +1,5 @@
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models;
+using CustomersManagement.UI.Models.Shared;
 using Microsoft.AspNetCore.Components;
 
 namespace CustomersManagement.UI.Pages.Tours;
@@ -12,10 +12,10 @@ public partial class Index
     [Inject]
     public ITourService Tour { get; set; }
 
-    public List<TourVM> Tours { get; private set; }
+    public List<ActivityVM> Tours { get; private set; }
     public string Message { get; set; } = string.Empty;
     public string SearchText = "";
-    List<TourVM> FilteredTours => Tours.Where(
+    List<ActivityVM> FilteredTours => Tours.Where(
             tour => (tour.Name + tour.TimeStart + tour.TimeEnd).Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)).ToList();
     protected override async Task OnInitializedAsync()
     {
@@ -55,5 +55,4 @@ public partial class Index
     {
         return ParticipantsListCollapsedStates[tourId] ? "Poka¿ uczestników" : "Zwiñ listê";
     }
-
 }

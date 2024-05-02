@@ -27,7 +27,12 @@ public class UpdateCustomerTourPaymentCommandHandler : IRequestHandler<UpdateCus
 
         var afterPaymentDetails = PaymentService.RelationAfterPayment(details, request.PaymentAmount);
 
-        await _relationsRepository.UpdateAsync(afterPaymentDetails);
+        details.EntireCostLeftToPay = afterPaymentDetails.EntireCostLeftToPay;
+        details.AdvancedPaymentLeftToPay = afterPaymentDetails.AdvancedPaymentLeftToPay;
+        details.EntireAmountPaymentDate = afterPaymentDetails.EntireAmountPaymentDate;
+        details.AdvancedPaymentDate = afterPaymentDetails.AdvancedPaymentDate;
+
+        await _relationsRepository.UpdateAsync(details);
 
         return Unit.Value;
     }

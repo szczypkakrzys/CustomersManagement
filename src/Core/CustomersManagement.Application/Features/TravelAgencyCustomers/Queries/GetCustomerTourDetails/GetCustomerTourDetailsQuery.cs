@@ -2,4 +2,4 @@
 
 namespace CustomersManagement.Application.Features.TravelAgencyCustomers.Queries.GetCustomerTourDetails;
 
-public record GetCustomerTourDetailsQuery(int CustomerId, int TourId) : IRequest<CustomerTourDetailsDto>;
+public record GetCustomerTourDetailsQuery(int customerId, int tourId) : IRequest<CustomerTourDetailsDto>;

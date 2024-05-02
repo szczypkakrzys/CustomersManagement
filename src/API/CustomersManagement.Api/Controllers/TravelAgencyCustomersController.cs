@@ -93,7 +93,7 @@ public class TravelAgencyCustomersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> AssignCustomerToTour(AssignCustomerCommand command)
+    public async Task<IActionResult> AssignCustomerToTour(AssignCustomerToTourCommand command)
     {
         await _mediator.Send(command);
         return NoContent();

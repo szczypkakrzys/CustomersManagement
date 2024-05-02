@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Blazored.LocalStorage;
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Models.Shared;
+using CustomersManagement.UI.Models.TravelAgency;
 using CustomersManagement.UI.Services.Base;
 
 namespace CustomersManagement.UI.Services;
@@ -25,7 +25,7 @@ public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustome
         {
             await AddBearerToken();
             var createCustomerCommand = _mapper.Map<CreateTravelAgencyCustomerCommand>(customer);
-            await _client.CustomersPOSTAsync(createCustomerCommand);
+            await _client.CustomersPOST2Async(createCustomerCommand);
             return new Response<Guid>() { IsSuccess = true };
         }
         catch (ApiException ex)
@@ -39,7 +39,7 @@ public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustome
         try
         {
             await AddBearerToken();
-            await _client.CustomersDELETEAsync(id);
+            await _client.CustomersDELETE2Async(id);
             return new Response<Guid>() { IsSuccess = true };
         }
         catch (ApiException ex)
@@ -51,14 +51,14 @@ public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustome
     public async Task<List<CustomerVM>> GetAllCustomers()
     {
         await AddBearerToken();
-        var customers = await _client.CustomersAllAsync();
+        var customers = await _client.CustomersAll2Async();
         return _mapper.Map<List<CustomerVM>>(customers);
     }
 
     public async Task<TravelAgencyCustomerDetailsVM> GetCustomerDetails(int id)
     {
         await AddBearerToken();
-        var customer = await _client.CustomersGETAsync(id);
+        var customer = await _client.CustomersGET2Async(id);
         return _mapper.Map<TravelAgencyCustomerDetailsVM>(customer);
     }
 
@@ -68,7 +68,7 @@ public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustome
         {
             await AddBearerToken();
             var updateCustomerCommand = _mapper.Map<UpdateTravelAgencyCustomerCommand>(customer);
-            await _client.CustomersPUTAsync(id.ToString(), updateCustomerCommand);
+            await _client.CustomersPUT2Async(id.ToString(), updateCustomerCommand);
             return new Response<Guid>() { IsSuccess = true };
         }
         catch (ApiException ex)
@@ -77,11 +77,11 @@ public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustome
         }
     }
 
-    public async Task<List<CustomerTourVM>> GetCustomerTours(int id)
+    public async Task<List<CustomerActivityVM>> GetCustomerTours(int id)
     {
         await AddBearerToken();
         var customerTours = await _client.ToursAsync(id);
-        return _mapper.Map<List<CustomerTourVM>>(customerTours);
+        return _mapper.Map<List<CustomerActivityVM>>(customerTours);
     }
 
     public async Task<Response<Guid>> AssignCustomerToTour(int customerId, int tourId)
@@ -89,7 +89,7 @@ public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustome
         try
         {
             await AddBearerToken();
-            var command = new AssignCustomerCommand
+            var command = new AssignCustomerToTourCommand
             {
                 CustomerId = customerId,
                 TourId = tourId
@@ -103,11 +103,11 @@ public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustome
         }
     }
 
-    public async Task<CustomerTourDetailsVM> CustomerTourDetails(int customerId, int tourId)
+    public async Task<CustomerActivityDetailsVM> CustomerTourDetails(int customerId, int tourId)
     {
         await AddBearerToken();
         var customer = await _client.TourGETAsync(customerId, tourId);
-        return _mapper.Map<CustomerTourDetailsVM>(customer);
+        return _mapper.Map<CustomerActivityDetailsVM>(customer);
     }
 
     public async Task<Response<Guid>> UpdateCustomerPayment(int customerId, int tourId, double paymentAmount)
@@ -121,7 +121,7 @@ public class TravelAgencyCustomerService : BaseHttpService, ITravelAgencyCustome
                 TourId = tourId,
                 PaymentAmount = paymentAmount
             };
-            await _client.PaymentAsync(customerId.ToString(), tourId.ToString(), paymentCommand);
+            await _client.Payment2Async(customerId.ToString(), tourId.ToString(), paymentCommand);
             return new Response<Guid>() { IsSuccess = true };
         }
         catch (ApiException ex)

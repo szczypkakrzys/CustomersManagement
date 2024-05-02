@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using CustomersManagement.Application.Features.Shared;
+using MediatR;
 
 namespace CustomersManagement.Application.Features.TravelAgencyCustomers.Commands.CreateTravelAgencyCustomer;
 

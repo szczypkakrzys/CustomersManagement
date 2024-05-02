@@ -1,6 +1,6 @@
 using AntDesign;
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models;
+using CustomersManagement.UI.Models.TravelAgency;
 using Microsoft.AspNetCore.Components;
 
 namespace CustomersManagement.UI.Pages.Tours;

@@ -11,6 +11,16 @@ public class DivingSchoolCustomerRepository : GenericRepository<DivingSchoolCust
     {
     }
 
+    public async Task<DivingSchoolCustomer> GetByIdWithTours(int id)
+    {
+        var customer = await _context.Set<DivingSchoolCustomer>()
+                                    .Include(p => p.DivingCourses)
+                                    .AsNoTracking()
+                                    .FirstOrDefaultAsync(q => q.Id == id);
+
+        return customer;
+    }
+
     public async Task<bool> IsCustomerUnique(
          string firstName,
          string lastName,

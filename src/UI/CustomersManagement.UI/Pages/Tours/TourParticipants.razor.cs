@@ -1,5 +1,5 @@
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models;
+using CustomersManagement.UI.Models.Shared;
 using Microsoft.AspNetCore.Components;
 
 namespace CustomersManagement.UI.Pages.Tours;
@@ -17,10 +17,10 @@ public partial class TourParticipants
     [Inject]
     public ITourService TourService { get; set; }
 
-    public List<TourParticipantVM> Participants { get; private set; }
+    public List<ActivityParticipantVM> Participants { get; private set; }
     public string Message { get; set; } = string.Empty;
     public string SearchText = "";
-    List<TourParticipantVM> FilteredCustomers => Participants.Where(
+    List<ActivityParticipantVM> FilteredCustomers => Participants.Where(
             customer => (customer.FirstName + " " + customer.LastName).Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)).ToList();
     protected override async Task OnInitializedAsync()
     {

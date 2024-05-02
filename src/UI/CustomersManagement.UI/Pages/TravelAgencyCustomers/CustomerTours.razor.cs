@@ -1,6 +1,7 @@
 using AntDesign;
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models;
+using CustomersManagement.UI.Models.Shared;
+using CustomersManagement.UI.Models.TravelAgency;
 using Microsoft.AspNetCore.Components;
 
 namespace CustomersManagement.UI.Pages.TravelAgencyCustomers;
@@ -20,8 +21,8 @@ public partial class CustomerTours
     public int Id { get; set; }
 
     TravelAgencyCustomerDetailsVM customer = new();
-    public List<CustomerTourVM> customerTours { get; private set; }
-    CustomerTourDetailsVM? customerTourDetails { get; set; }
+    public List<CustomerActivityVM> customerTours { get; private set; }
+    CustomerActivityDetailsVM? customerTourDetails { get; set; }
     public string Message { get; set; } = string.Empty;
     public string SearchText = "";
     public bool ToursListCollapsed = true;
@@ -38,7 +39,7 @@ public partial class CustomerTours
     double newPaymentValue;
     bool paymentModalVisible = false;
 
-    List<CustomerTourVM> FilteredTours => customerTours.Where(
+    List<CustomerActivityVM> FilteredTours => customerTours.Where(
            tour => (tour.Name + tour.TimeStart + tour.TimeEnd).Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)).ToList();
 
     protected override async Task OnParametersSetAsync()
@@ -68,9 +69,9 @@ public partial class CustomerTours
     }
     [Inject]
     public ITourService Tour { get; set; }
-    public List<TourVM> Tours { get; private set; }
+    public List<ActivityVM> Tours { get; private set; }
     public string AllToursSearchText = "";
-    List<TourVM> FilteredAllToursList => Tours.Where(
+    List<ActivityVM> FilteredAllToursList => Tours.Where(
             tour => (tour.Name + tour.TimeStart + tour.TimeEnd).Contains(AllToursSearchText, StringComparison.CurrentCultureIgnoreCase)).ToList();
     bool confirmModalVisible = false;
     string choosenTourName = "";

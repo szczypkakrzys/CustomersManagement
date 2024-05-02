@@ -1,11 +1,11 @@
-﻿using CustomersManagement.Domain.TravelAgency;
+﻿using CustomersManagement.Domain.Common;
 
 namespace CustomersManagement.Application.Services;
 
 public class PaymentService
 {
-    public static CustomersToursRelations RelationAfterPayment(
-        CustomersToursRelations relation,
+    public static CustomersActivitiesRelations RelationAfterPayment(
+        CustomersActivitiesRelations relation,
         double paymentAmount)
     {
         var (entireCostLeft, advancedPaymentLeft) = CalculatePayment(

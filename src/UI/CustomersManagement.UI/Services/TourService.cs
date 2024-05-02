@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Blazored.LocalStorage;
 using CustomersManagement.UI.Contracts;
-using CustomersManagement.UI.Models;
+using CustomersManagement.UI.Models.Shared;
+using CustomersManagement.UI.Models.TravelAgency;
 using CustomersManagement.UI.Services.Base;
 
 namespace CustomersManagement.UI.Services;
@@ -47,11 +48,11 @@ public class TourService : BaseHttpService, ITourService
         }
     }
 
-    public async Task<List<TourVM>> GetAllTours()
+    public async Task<List<ActivityVM>> GetAllTours()
     {
         await AddBearerToken();
         var tours = await _client.ToursAllAsync();
-        return _mapper.Map<List<TourVM>>(tours);
+        return _mapper.Map<List<ActivityVM>>(tours);
     }
 
     public async Task<TourDetailsVM> GetTourDetails(int id)
@@ -76,10 +77,10 @@ public class TourService : BaseHttpService, ITourService
         }
     }
 
-    public async Task<List<TourParticipantVM>> GetTourParticipants(int tourId)
+    public async Task<List<ActivityParticipantVM>> GetTourParticipants(int tourId)
     {
         await AddBearerToken();
-        var tour = await _client.ParticipantsAsync(tourId);
-        return _mapper.Map<List<TourParticipantVM>>(tour);
+        var participants = await _client.Participants2Async(tourId);
+        return _mapper.Map<List<ActivityParticipantVM>>(participants);
     }
 }

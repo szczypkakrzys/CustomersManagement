@@ -16,10 +16,8 @@ public class UpdateCustomerTourPaymentCommandValidator : AbstractValidator<Updat
 
         RuleFor(p => p.PaymentAmount)
             .NotEmpty()
-                .WithMessage("{PropertyName} is required");
-
-        RuleFor(p => p.PaymentAmount)
-           .LessThanOrEqualTo(entireCostLeftToPay)
-               .WithMessage("{PropertyName} can't be greater than amount left to pay.");
+                .WithMessage("{PropertyName} is required")
+            .LessThanOrEqualTo(entireCostLeftToPay)
+                .WithMessage("{PropertyName} can't be greater than amount left to pay.");
     }
 }

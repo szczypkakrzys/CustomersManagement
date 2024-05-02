@@ -20,6 +20,8 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 builder.Services.AddScoped<ITravelAgencyCustomerService, TravelAgencyCustomerService>();
 builder.Services.AddScoped<ITourService, TourService>();
+builder.Services.AddScoped<IDivingSchoolCustomerService, DivingSchoolCustomerService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

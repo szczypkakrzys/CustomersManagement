@@ -1,8 +1,4 @@
-﻿<h3>Uczestnicy @TourName</h3>
-
-
-
-@if (string.IsNullOrEmpty(Message) == false)
+﻿@if (string.IsNullOrEmpty(Message) == false)
 {
     <div class="alert alert-danger">
         @Message
@@ -13,8 +9,14 @@
 {
     <p>Ładowanie danych...</p>
 }
+else if(Participants.Count == 0)
+{
+    <Title Level="4">Ta wycieczka nie ma jeszcze żadnych przypisanych klientów.</Title>
+}
 else
 {
+    <h3>Uczestnicy @TourName</h3>
+
     <GridRow>
         <GridCol Span="8">
             <Search Placeholder="Wyszukaj" ClassicSearchIcon @bind-Value="SearchText" BindOnInput="true" Size="large" />

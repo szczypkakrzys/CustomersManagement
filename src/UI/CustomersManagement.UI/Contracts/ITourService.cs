@@ -1,14 +1,15 @@
-﻿using CustomersManagement.UI.Models;
+﻿using CustomersManagement.UI.Models.Shared;
+using CustomersManagement.UI.Models.TravelAgency;
 using CustomersManagement.UI.Services.Base;
 
 namespace CustomersManagement.UI.Contracts;
 
 public interface ITourService
 {
-    Task<List<TourVM>> GetAllTours();
+    Task<List<ActivityVM>> GetAllTours();
     Task<TourDetailsVM> GetTourDetails(int id);
-    Task<Response<Guid>> CreateTour(TourDetailsVM customer);
-    Task<Response<Guid>> UpdateTour(int id, TourDetailsVM customer);
+    Task<Response<Guid>> CreateTour(TourDetailsVM tour);
+    Task<Response<Guid>> UpdateTour(int id, TourDetailsVM tour);
     Task<Response<Guid>> DeleteTour(int id);
-    Task<List<TourParticipantVM>> GetTourParticipants(int tourId);
+    Task<List<ActivityParticipantVM>> GetTourParticipants(int tourId);
 }
