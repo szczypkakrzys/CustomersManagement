@@ -1,0 +1,12 @@
+﻿@page "/"
+<PageTitle>Home</PageTitle>
+
+<h1>Strona główna</h1>
+
+Główna strona aplikacji!
+
+<AuthorizeView>
+    <Authorized>
+        <button class="btn btn-danger" @onclick="Logout">Logout</button>
+    </Authorized>
+</AuthorizeView>
