@@ -99,7 +99,7 @@ namespace CustomersManagement.Identity.Migrations
                         {
                             Id = "fd7be93d-a089-4801-9de5-c5aa64c97962",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a7b6710c-46ee-4268-8778-37e7091602b7",
+                            ConcurrencyStamp = "516498bf-7da1-4488-92b9-b79e78556830",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -107,9 +107,9 @@ namespace CustomersManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKGm5QyVzV/Spm24ZwokfH4F2s/66SfnBMm335pBIl0Vaw6Cxi+j7jA54rGapsZJpw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBCqd6HGJL9ZkDqpL1Whk0PvxarUn2D2pBSxXa7pv3geHgrE/ufOsu9WtctjJAUldA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c124d89b-9e19-4185-98f0-2e03d0a4163f",
+                            SecurityStamp = "1ff6d419-4c5b-44bb-931e-6610c6b0d62b",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -117,7 +117,7 @@ namespace CustomersManagement.Identity.Migrations
                         {
                             Id = "90ebb8bd-27fc-4c78-968f-9d93d267a502",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7cc167e6-4dab-469e-b547-ecb51f699513",
+                            ConcurrencyStamp = "4579bc2c-2b6f-4859-b8aa-947790f332e4",
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -125,9 +125,9 @@ namespace CustomersManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEmm6lwt7TuMAcuET8C6oYTfbc5QJ4PraeSuTT/S/xRqLFTKmJBmlQqHcXdWOJOTwA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIFXlkPvXZuPo1p1pdVyUUhjcvOJ/UhePoggghYopRMNLbgqiIMzi1a36RG8syrqbw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fc99f990-c85b-480e-a5be-d5f467b7c081",
+                            SecurityStamp = "4f3d0f1e-251f-4baa-9bd4-c4c4be25c8fb",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });

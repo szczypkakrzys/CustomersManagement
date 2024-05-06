@@ -19,8 +19,12 @@ public static class PersistenceServiceRegistration
         });
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
-        services.AddScoped<IAddressRepository, AddressReposiotry>();
+        services.AddScoped<ITravelAgencyCustomerRepository, TravelAgencyCustomerRepository>();
+        services.AddScoped<ITourRepository, TourRepository>();
+        services.AddScoped<ICustomersToursRelationsRepository, CustomersToursRelationsRepository>();
+        services.AddScoped<IDivingSchoolCustomerRepository, DivingSchoolCustomerRepository>();
+        services.AddScoped<IDivingCourseRepository, DivingCourseRepository>();
+        services.AddScoped<ICustomersDivingCoursesRelationsRepository, CustomersDivingCoursesRelationsRepository>();
 
         return services;
     }
