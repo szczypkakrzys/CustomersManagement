@@ -18,4 +18,9 @@
       <ProjectReference Include="..\CustomersManagement.Domain\CustomersManagement.Domain.csproj" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <Folder Include="Features\Emails\Queries\" />
+    </ItemGroup>
+
 </Project>

@@ -23,6 +23,7 @@ builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<IDivingSchoolCustomerService, DivingSchoolCustomerService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

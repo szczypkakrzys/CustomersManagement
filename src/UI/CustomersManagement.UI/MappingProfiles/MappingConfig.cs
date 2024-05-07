@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Models.DivingSchool;
+using CustomersManagement.UI.Models.Newsletter;
 using CustomersManagement.UI.Models.Shared;
 using CustomersManagement.UI.Models.TravelAgency;
 using CustomersManagement.UI.Services.Base;
@@ -38,6 +39,8 @@ public class MappingConfig : Profile
         CreateMap<CourseDetailsDto, CourseDetailsVM>();
         CreateMap<CourseParticipantDto, ActivityParticipantVM>();
         CreateMap<CourseDetailsVM, UpdateTourCommand>();
+
+        CreateMap<EmailVM, SendEmailCommand>();
 
         CreateMap<RegisterVM, RegistrationRequest>()
             .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(src => src.Email));
