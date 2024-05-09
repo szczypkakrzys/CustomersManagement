@@ -8,6 +8,8 @@ namespace CustomersManagement.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
+//TODO
+//authorize with proper roles / policies
 public class EmailController : Controller
 {
     private readonly IMediator _mediator;

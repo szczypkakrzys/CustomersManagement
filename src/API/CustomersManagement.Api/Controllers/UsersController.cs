@@ -12,7 +12,7 @@ namespace CustomersManagement.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+[Authorize(Roles = RoleName.Administrator)]
 public class UsersController : Controller
 {
     private readonly IMediator _mediator;
