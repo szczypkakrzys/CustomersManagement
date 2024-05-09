@@ -80,6 +80,7 @@ public class UserService : IUserService
         var employee = await _userManager.FindByIdAsync(userId) ??
             throw new NotFoundException(nameof(Application), userId);
         employee.Email = newEmail;
+        employee.UserName = newEmail;
         await _userManager.UpdateAsync(employee);
     }
 

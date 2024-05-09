@@ -1,8 +1,7 @@
-﻿using CustomersManagement.Application.Contracts.Identity;
-using CustomersManagement.Application.Features.SystemUsers.Commands.DeleteUser;
+﻿using CustomersManagement.Application.Features.SystemUsers.Commands.DeleteUser;
 using CustomersManagement.Application.Features.SystemUsers.Commands.RegisterNewUser;
 using CustomersManagement.Application.Features.SystemUsers.Commands.UpdateEmail;
-using CustomersManagement.Application.Features.SystemUsers.Queries;
+using CustomersManagement.Application.Features.SystemUsers.Queries.GetUsersWithGivenRole;
 using CustomersManagement.Application.Models.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -16,13 +15,10 @@ namespace CustomersManagement.Api.Controllers;
 public class UsersController : Controller
 {
     private readonly IMediator _mediator;
-    private readonly IUserService _userService;
 
-    public UsersController(IMediator mediator,
-        IUserService userService)
+    public UsersController(IMediator mediator)
     {
         _mediator = mediator;
-        _userService = userService;
     }
 
     [HttpGet("{role}")]

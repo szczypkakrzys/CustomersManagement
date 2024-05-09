@@ -2,7 +2,7 @@
 using CustomersManagement.Application.Models.Identity;
 using MediatR;
 
-namespace CustomersManagement.Application.Features.SystemUsers.Queries;
+namespace CustomersManagement.Application.Features.SystemUsers.Queries.GetUsersWithGivenRole;
 
 public class GetAllUsersWithGivenRoleQueryHandler : IRequestHandler<GetAllUsersWithGivenRoleQuery, IEnumerable<Employee>>
 {
