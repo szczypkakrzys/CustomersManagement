@@ -34,11 +34,6 @@
 
             </div>
             <div class="form-group">
-                <label asp-for="UserName" class="control-label">UserName</label>
-                <InputText id="UserName" class="form-control" @bind-Value="@Model.UserName"></InputText>
-                <ValidationMessage For="@(() => Model.UserName)" />
-            </div>
-            <div class="form-group">
                 <label asp-for="Password" class="control-label">Password</label>
                 <InputText id="Password" class="form-control" @bind-Value="@Model.Password"></InputText>
                 <ValidationMessage For="@(() => Model.Password)" />

@@ -1,9 +1,12 @@
 using CustomersManagement.UI.Contracts;
+using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Models.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
 namespace CustomersManagement.UI.Pages.Courses;
 
+[Authorize(Policy = Policies.DivingSchool)]
 public partial class Index
 {
     [Inject]
