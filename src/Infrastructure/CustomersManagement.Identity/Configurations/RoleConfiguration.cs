@@ -15,11 +15,18 @@ public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
                 Name = "Administrator",
                 NormalizedName = "ADMINISTRATOR"
             },
+             new IdentityRole
+             {
+                 Id = "d763c0cd-a5bc-4721-8421-ac4a37071495",
+                 Name = "Travel Agency Employee",
+                 NormalizedName = "TRAVEL AGENCY EMPLOYEE"
+             },
             new IdentityRole
             {
                 Id = "5bb93284-b026-4ed1-a331-5533e757a143",
-                Name = "Employee",
-                NormalizedName = "EMPLOYEE"
+                Name = "Diving School Employee",
+                NormalizedName = "DIVING SCHOOL EMPLOYEE"
             });
+
     }
 }

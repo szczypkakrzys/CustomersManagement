@@ -32,10 +32,9 @@ public class AuthService : IAuthService
         var user = await _userManager.FindByEmailAsync(request.EmailAddress)
             ?? throw new NotFoundException($"User with email '{request.EmailAddress}' not found.", request.EmailAddress);
 
-        var result = await _signInManager.CheckPasswordSignInAsync(
-                                                                user,
-                                                                request.Password,
-                                                                false);
+        var result = await _signInManager.CheckPasswordSignInAsync(user,
+                                                                   request.Password,
+                                                                   false);
 
         if (!result.Succeeded)
             throw new BadRequestException($"Credentials for '{request.EmailAddress}' aren't valid.");
@@ -51,36 +50,6 @@ public class AuthService : IAuthService
         };
 
         return response;
-    }
-
-    public async Task<RegistrationResponse> Register(RegistrationRequest request)
-    {
-        var user = new ApplicationUser
-        {
-            Email = request.EmailAddress,
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            UserName = request.UserName,
-            EmailConfirmed = true
-        };
-
-        var result = await _userManager.CreateAsync(user, request.Password);
-
-        if (result.Succeeded)
-        {
-            await _userManager.AddToRoleAsync(user, "Employee");
-            return new RegistrationResponse() { UserId = user.Id };
-        }
-        else
-        {
-            var errorMessage = new StringBuilder();
-            foreach (var error in result.Errors)
-            {
-                errorMessage.AppendFormat("- {0}\n", error.Description);
-            }
-
-            throw new BadRequestException($"{errorMessage}");
-        }
     }
 
     private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
