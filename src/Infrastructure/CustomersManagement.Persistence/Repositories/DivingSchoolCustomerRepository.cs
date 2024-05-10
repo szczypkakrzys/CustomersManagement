@@ -34,4 +34,11 @@ public class DivingSchoolCustomerRepository : GenericRepository<DivingSchoolCust
 
         return !result;
     }
+
+    public async Task<IEnumerable<DivingSchoolCustomer>> GetCustomersByDateOfBirth(DateOnly date)
+    {
+        return await _context.DivingSchoolCustomers
+           .Where(customer => customer.DateOfBirth == date)
+           .ToListAsync();
+    }
 }

@@ -18,4 +18,16 @@ public class DivingCourseRepository : GenericRepository<DivingCourse>, IDivingCo
                             .AsNoTracking()
                             .FirstOrDefaultAsync(q => q.Id == id);
     }
+
+    public async Task<List<DivingCourse>> GetCoursesWithRelationsByDate(DateOnly date)
+    {
+        return await _context.DivingCourses
+           .Where(course => course.TimeStart == date
+                          || course.AdvancePaymentDeadline == date
+                          || course.EntireAmountPaymentDeadline == date
+                          || course.TimeEnd == date)
+           .Include(p => p.DivingCourseRelations)
+           .AsNoTracking()
+           .ToListAsync();
+    }
 }
