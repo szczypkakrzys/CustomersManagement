@@ -27,10 +27,10 @@ public class GetUserNotificationsQueryHandler : IRequestHandler<GetUserNotificat
         GetUserNotificationsQuery request,
         CancellationToken cancellationToken)
     {
-        var employee = await _userService.GetEmployee(request.userId) ??
-            throw new NotFoundException(nameof(Employee), request.userId);
+        var employee = await _userService.GetEmployee(request.UserId) ??
+            throw new NotFoundException(nameof(Employee), request.UserId);
 
-        var notifications = await _notificationRepository.GetUserNotifications(request.userId);
+        var notifications = await _notificationRepository.GetUserNotifications(request.UserId);
 
         var data = _mapper.Map<IEnumerable<NotificationDto>>(notifications);
 

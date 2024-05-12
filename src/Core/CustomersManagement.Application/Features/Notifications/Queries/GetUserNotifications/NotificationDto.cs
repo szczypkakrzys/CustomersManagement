@@ -9,4 +9,5 @@ public class NotificationDto
     public int? ActivityId { get; set; }
     public IEnumerable<int>? CustomersIdsList { get; set; }
     public NotificationType Type { get; set; }
+    public string Date { get; set; }
 }

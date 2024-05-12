@@ -26,7 +26,7 @@ public class NotificationService : INotificationService
 
     //TODO
     //add users to Id's collection - create one notification with 'Birthday' message and users collection in Id's 
-    public List<Notification> ProcessCustomersBirthdaysNotifications(List<string> customers, NotificationType type)
+    public List<Notification> ProcessCustomersBirthdaysNotifications(List<string> customers, NotificationType type, DateOnly date)
     {
         List<Notification> notificationsList = [];
 
@@ -36,6 +36,7 @@ public class NotificationService : INotificationService
             {
                 Message = "Birthday:" + customer,
                 Type = type,
+                Date = date
             };
 
             notificationsList.Add(notification);
@@ -59,7 +60,8 @@ public class NotificationService : INotificationService
                 notificationsList.Add(CreateActivityPaymentNotification("Advance Payment",
                                                                         NotificationType.TravelAgency,
                                                                         tour.Id,
-                                                                        customersIdsList));
+                                                                        customersIdsList,
+                                                                        date));
             }
             else if (tour.EntireAmountPaymentDeadline == date)
             {
@@ -69,21 +71,24 @@ public class NotificationService : INotificationService
                 notificationsList.Add(CreateActivityPaymentNotification("Entire Payment",
                                                                         NotificationType.TravelAgency,
                                                                         tour.Id,
-                                                                        customersIdsList));
+                                                                        customersIdsList,
+                                                                        date));
             }
             else if (tour.TimeStart == date)
             {
                 notificationsList.Add(
                     CreateActivityDateNotification("Time Start",
                                                    NotificationType.TravelAgency,
-                                                   tour.Id));
+                                                   tour.Id,
+                                                   date));
             }
             else if (tour.TimeEnd == date)
             {
                 notificationsList.Add(
                     CreateActivityDateNotification("Time End",
                                                    NotificationType.TravelAgency,
-                                                   tour.Id));
+                                                   tour.Id,
+                                                   date));
             }
         }
 
@@ -105,7 +110,8 @@ public class NotificationService : INotificationService
                 notificationsList.Add(CreateActivityPaymentNotification("Advance Payment",
                                                                         NotificationType.DivingSchool,
                                                                         course.Id,
-                                                                        customersIdsList));
+                                                                        customersIdsList,
+                                                                        date));
             }
             else if (course.EntireAmountPaymentDeadline == date)
             {
@@ -116,21 +122,24 @@ public class NotificationService : INotificationService
                 notificationsList.Add(CreateActivityPaymentNotification("Entire Payment",
                                                                         NotificationType.DivingSchool,
                                                                         course.Id,
-                                                                        customersIdsList));
+                                                                        customersIdsList,
+                                                                        date));
             }
             else if (course.TimeStart == date)
             {
                 notificationsList.Add(
                     CreateActivityDateNotification("Time Start",
                                                    NotificationType.DivingSchool,
-                                                   course.Id));
+                                                   course.Id,
+                                                   date));
             }
             else if (course.TimeEnd == date)
             {
                 notificationsList.Add(
                     CreateActivityDateNotification("Time End",
                                                    NotificationType.DivingSchool,
-                                                   course.Id));
+                                                   course.Id,
+                                                   date));
             }
         }
 
@@ -199,24 +208,33 @@ public class NotificationService : INotificationService
         return customersIdsList;
     }
 
-    private Notification CreateActivityPaymentNotification(string message, NotificationType type, int activityId, List<int> customersIdsList)
+    private Notification CreateActivityPaymentNotification(string message,
+                                                           NotificationType type,
+                                                           int activityId,
+                                                           List<int> customersIdsList,
+                                                           DateOnly date)
     {
         return new Notification
         {
             Message = message,
             Type = type,
             ActivityId = activityId,
-            CustomersIdsList = customersIdsList
+            CustomersIdsList = customersIdsList,
+            Date = date
         };
     }
 
-    private Notification CreateActivityDateNotification(string message, NotificationType type, int activityId)
+    private Notification CreateActivityDateNotification(string message,
+                                                        NotificationType type,
+                                                        int activityId,
+                                                        DateOnly date)
     {
         return new Notification
         {
             Message = message,
             Type = type,
-            ActivityId = activityId
+            ActivityId = activityId,
+            Date = date
         };
     }
 }

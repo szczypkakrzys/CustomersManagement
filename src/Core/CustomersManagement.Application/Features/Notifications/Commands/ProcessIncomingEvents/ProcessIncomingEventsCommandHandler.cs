@@ -36,7 +36,8 @@ public class ProcessIncomingEventsCommandHandler : IRequestHandler<ProcessIncomi
 
             var birthdayNotifications = _notificationService.ProcessCustomersBirthdaysNotifications(
                 travelAgencyCustomersBirthdays,
-                NotificationType.TravelAgency);
+                NotificationType.TravelAgency,
+                requestDate);
 
             notificationsList.AddRange(birthdayNotifications);
         }
@@ -45,7 +46,8 @@ public class ProcessIncomingEventsCommandHandler : IRequestHandler<ProcessIncomi
         {
             var birthdayNotifications = _notificationService.ProcessCustomersBirthdaysNotifications(
                 divingSchoolCustomersBirthdays,
-                NotificationType.DivingSchool);
+                NotificationType.DivingSchool,
+                requestDate);
 
             notificationsList.AddRange(birthdayNotifications);
         }

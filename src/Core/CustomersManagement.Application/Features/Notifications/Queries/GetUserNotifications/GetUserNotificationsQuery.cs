@@ -2,4 +2,4 @@
 
 namespace CustomersManagement.Application.Features.Notifications.Queries.GetUserNotifications;
 
-public record class GetUserNotificationsQuery(string userId) : IRequest<IEnumerable<NotificationDto>>;
+public record class GetUserNotificationsQuery(string UserId) : IRequest<IEnumerable<NotificationDto>>;

@@ -9,4 +9,5 @@ public class Notification : BaseEntity
     public int? ActivityId { get; set; }
     public List<int>? CustomersIdsList { get; set; } = new List<int>();
     public NotificationType Type { get; set; }
+    public DateOnly Date { get; set; }
 }
