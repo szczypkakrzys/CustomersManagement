@@ -32,6 +32,7 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICustomNotificationService, CustomNotificationService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

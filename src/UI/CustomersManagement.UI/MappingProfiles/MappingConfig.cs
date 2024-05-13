@@ -3,6 +3,7 @@ using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Models.DivingSchool;
 using CustomersManagement.UI.Models.Emloyee;
 using CustomersManagement.UI.Models.Newsletter;
+using CustomersManagement.UI.Models.Notification;
 using CustomersManagement.UI.Models.Shared;
 using CustomersManagement.UI.Models.TravelAgency;
 using CustomersManagement.UI.Services.Base;
@@ -46,7 +47,8 @@ public class MappingConfig : Profile
         CreateMap<Employee, EmployeeVM>();
         CreateMap<RegisterVM, RegisterNewUserCommand>();
 
-        //CreateMap<RegisterVM, RegistrationRequest>()
-        //    .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(src => src.Email));
+        CreateMap<NotificationDto, NotificationVM>()
+            .ForMember(dest => dest.ViewMessage, opt => opt.Ignore())
+            .ForMember(dest => dest.Customers, opt => opt.Ignore());
     }
 }
