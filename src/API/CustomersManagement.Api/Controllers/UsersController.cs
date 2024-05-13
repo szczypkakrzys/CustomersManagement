@@ -29,7 +29,7 @@ public class UsersController : Controller
     }
 
     [HttpPost]
-    [ProducesResponseType(201)]
+    [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
