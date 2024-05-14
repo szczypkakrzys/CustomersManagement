@@ -4,6 +4,7 @@ using CustomersManagement.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomersManagement.Persistence.Migrations
 {
     [DbContext(typeof(CustomerDatabaseContext))]
-    partial class CustomerDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240511134955_updateNotificationDomainModel")]
+    partial class updateNotificationDomainModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,9 +249,6 @@ namespace CustomersManagement.Persistence.Migrations
 
                     b.Property<string>("CustomersIdsList")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");

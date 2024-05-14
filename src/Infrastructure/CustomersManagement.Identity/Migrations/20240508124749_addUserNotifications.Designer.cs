@@ -4,6 +4,7 @@ using CustomersManagement.Identity.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomersManagement.Identity.Migrations
 {
     [DbContext(typeof(CustomersManagementIdentityDbContext))]
-    partial class CustomersManagementIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240508124749_addUserNotifications")]
+    partial class addUserNotifications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,44 @@ namespace CustomersManagement.Identity.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CustomersManagement.Domain.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConnectedCustomersIds")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeCreatedInUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TimeLastModifiedInUtc")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Notifications");
+                });
 
             modelBuilder.Entity("CustomersManagement.Identity.Models.ApplicationUser", b =>
                 {
@@ -99,7 +140,7 @@ namespace CustomersManagement.Identity.Migrations
                         {
                             Id = "fd7be93d-a089-4801-9de5-c5aa64c97962",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8b089f60-48cd-4cb5-ad6b-78ac7e6ad1ca",
+                            ConcurrencyStamp = "7cf4d48e-3082-4a6c-ae27-ad421ec2b4f9",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -107,9 +148,9 @@ namespace CustomersManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE3wESN6w38+l61monzgcvWcm9qsAqxXf1u7YvZo77WcJ+IZuUqXx25nYH+0Wbul2Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJxW/pq7GekyQ8jjhFKesCDBX4h+wX/tKAC6K4HdcumU+yBaHH/8EPvi/5aAaeJI1g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "66a15794-1d7b-48f5-b12f-d35054d02651",
+                            SecurityStamp = "4247789f-5a71-4486-99fc-b22e127b6294",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -117,7 +158,7 @@ namespace CustomersManagement.Identity.Migrations
                         {
                             Id = "90ebb8bd-27fc-4c78-968f-9d93d267a502",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b85ed4ba-de55-4db4-a546-cec1da3f99f6",
+                            ConcurrencyStamp = "80b74a77-ba7d-4d1a-86b8-4aa71e9527cf",
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -125,9 +166,9 @@ namespace CustomersManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENo8SoKOSyndxKf996QIzvoWwiYOSRb2BU10lhjaAdIocN39DI4p+ebMfwFYLfBzRA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGeEgfwvk0jJ0jy0+Z9CJTm4Rw2b9Dj6u74EuB+wg1hIv8mmAFWpYWoJVhSizzeF3g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a3344fbf-cf62-4708-9310-b7594dab7bdf",
+                            SecurityStamp = "1874a4a0-6ab9-4812-8d73-d5722825922d",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });
@@ -168,15 +209,9 @@ namespace CustomersManagement.Identity.Migrations
                         },
                         new
                         {
-                            Id = "d763c0cd-a5bc-4721-8421-ac4a37071495",
-                            Name = "Travel Agency Employee",
-                            NormalizedName = "TRAVEL AGENCY EMPLOYEE"
-                        },
-                        new
-                        {
                             Id = "5bb93284-b026-4ed1-a331-5533e757a143",
-                            Name = "Diving School Employee",
-                            NormalizedName = "DIVING SCHOOL EMPLOYEE"
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
                         });
                 });
 
@@ -298,6 +333,17 @@ namespace CustomersManagement.Identity.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CustomersManagement.Domain.Notification", b =>
+                {
+                    b.HasOne("CustomersManagement.Identity.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Notifications")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -347,6 +393,11 @@ namespace CustomersManagement.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CustomersManagement.Identity.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Notifications");
                 });
 #pragma warning restore 612, 618
         }

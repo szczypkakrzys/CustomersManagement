@@ -9,4 +9,5 @@ public interface ITravelAgencyCustomerRepository : IGenericRepository<TravelAgen
         string firstName,
         string lastName,
         string emailAddress);
+    Task<IEnumerable<TravelAgencyCustomer>> GetCustomersByDateOfBirth(DateOnly date);
 }

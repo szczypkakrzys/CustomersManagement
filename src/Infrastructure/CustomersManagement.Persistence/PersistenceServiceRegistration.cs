@@ -25,6 +25,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IDivingSchoolCustomerRepository, DivingSchoolCustomerRepository>();
         services.AddScoped<IDivingCourseRepository, DivingCourseRepository>();
         services.AddScoped<ICustomersDivingCoursesRelationsRepository, CustomersDivingCoursesRelationsRepository>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
 
         return services;
     }

@@ -4,6 +4,7 @@ using CustomersManagement.Identity.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomersManagement.Identity.Migrations
 {
     [DbContext(typeof(CustomersManagementIdentityDbContext))]
-    partial class CustomersManagementIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240510104648_newNotificationsMigration")]
+    partial class newNotificationsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,48 @@ namespace CustomersManagement.Identity.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CustomersManagement.Domain.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomersIdsList")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeCreatedInUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TimeLastModifiedInUtc")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Notifications");
+                });
 
             modelBuilder.Entity("CustomersManagement.Identity.Models.ApplicationUser", b =>
                 {
@@ -99,7 +144,7 @@ namespace CustomersManagement.Identity.Migrations
                         {
                             Id = "fd7be93d-a089-4801-9de5-c5aa64c97962",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8b089f60-48cd-4cb5-ad6b-78ac7e6ad1ca",
+                            ConcurrencyStamp = "1fc77b39-b311-404b-af3e-9b067083d2ac",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -107,9 +152,9 @@ namespace CustomersManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE3wESN6w38+l61monzgcvWcm9qsAqxXf1u7YvZo77WcJ+IZuUqXx25nYH+0Wbul2Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEATMznM+0dJYDUIXrWpOCywjjY5CJXsgJLh+lbIBy10zHzbAVtFFVq8zOFkdJEcjtA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "66a15794-1d7b-48f5-b12f-d35054d02651",
+                            SecurityStamp = "282a6e73-829e-441a-af2b-44dc820f9895",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -117,7 +162,7 @@ namespace CustomersManagement.Identity.Migrations
                         {
                             Id = "90ebb8bd-27fc-4c78-968f-9d93d267a502",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b85ed4ba-de55-4db4-a546-cec1da3f99f6",
+                            ConcurrencyStamp = "14a769f0-d47b-47aa-a9fa-047f000a1866",
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -125,9 +170,9 @@ namespace CustomersManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENo8SoKOSyndxKf996QIzvoWwiYOSRb2BU10lhjaAdIocN39DI4p+ebMfwFYLfBzRA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEFJ6FqxC06mB6xp+TNs5EFmfrOOhiU7pUyJYN2/9JVZ41z3Qchzl2tTbA131Xf4oA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a3344fbf-cf62-4708-9310-b7594dab7bdf",
+                            SecurityStamp = "16cd4e1e-a798-4ff3-b498-3b866b6f735c",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });
@@ -298,6 +343,17 @@ namespace CustomersManagement.Identity.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CustomersManagement.Domain.Notification", b =>
+                {
+                    b.HasOne("CustomersManagement.Identity.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Notifications")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -347,6 +403,11 @@ namespace CustomersManagement.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CustomersManagement.Identity.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Notifications");
                 });
 #pragma warning restore 612, 618
         }
