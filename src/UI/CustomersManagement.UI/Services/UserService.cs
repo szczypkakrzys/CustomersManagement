@@ -67,7 +67,7 @@ public class UserService : BaseHttpService, IUserService
                 Id = userId,
                 NewEmail = newEmail
             };
-            await _client.UsersPUTAsync(updateUserEmailCommand);
+            await _client.UsersPUTAsync(newEmail, updateUserEmailCommand);
             return new Response<Guid>() { IsSuccess = true };
         }
         catch (ApiException ex)

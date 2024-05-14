@@ -29,7 +29,7 @@ public class UsersController : Controller
     }
 
     [HttpPost]
-    [ProducesResponseType(201)]
+    [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
@@ -56,7 +56,6 @@ public class UsersController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(400)]
     [ProducesDefaultResponseType]
-    [HttpPut]
     public async Task<IActionResult> ChangeEmail(UpdateUserEmailCommand command)
     {
         await _mediator.Send(command);
