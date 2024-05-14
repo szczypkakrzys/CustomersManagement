@@ -14,9 +14,6 @@ public class RegisterVM
     [EmailAddress(ErrorMessage = "Podany adres e-mail nie jest w poprawnym formacie")]
     public string Email { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Nazwa użytkownika jest wymagana")]
-    public string UserName { get; set; } = string.Empty;
-
     [Required(ErrorMessage = "Hasło jest wymagane")]
     public string Password { get; set; } = string.Empty;
 }

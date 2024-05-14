@@ -1,4 +1,5 @@
-﻿using CustomersManagement.Application.Features.TravelAgencyCustomers.Commands.AssignCustomerToTour;
+﻿using CustomersManagement.Api.Models;
+using CustomersManagement.Application.Features.TravelAgencyCustomers.Commands.AssignCustomerToTour;
 using CustomersManagement.Application.Features.TravelAgencyCustomers.Commands.CreateTravelAgencyCustomer;
 using CustomersManagement.Application.Features.TravelAgencyCustomers.Commands.DeleteTravelAgencyCustomer;
 using CustomersManagement.Application.Features.TravelAgencyCustomers.Commands.RemoveCustomerFromTour;
@@ -16,7 +17,7 @@ namespace Cutomers.Api.Controllers;
 
 [Route("api/TravelAgency/Customers/")]
 [ApiController]
-[Authorize]
+[Authorize(Policy = Policies.DivingSchool)]
 public class TravelAgencyCustomersController : ControllerBase
 {
     private readonly IMediator _mediator;

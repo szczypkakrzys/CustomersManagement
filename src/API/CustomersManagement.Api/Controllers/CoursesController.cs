@@ -1,4 +1,5 @@
-﻿using CustomersManagement.Application.Features.Courses.Commands.CreateCourse;
+﻿using CustomersManagement.Api.Models;
+using CustomersManagement.Application.Features.Courses.Commands.CreateCourse;
 using CustomersManagement.Application.Features.Courses.Commands.DeleteCourse;
 using CustomersManagement.Application.Features.Courses.Commands.UpdateCourse;
 using CustomersManagement.Application.Features.Courses.Queries.GetAllCourseParticipants;
@@ -12,7 +13,7 @@ namespace CustomersManagement.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+[Authorize(Policy = Policies.DivingSchool)]
 public class CoursesController : Controller
 {
     private readonly IMediator _mediator;

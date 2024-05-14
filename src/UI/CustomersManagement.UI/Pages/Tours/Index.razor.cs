@@ -1,9 +1,12 @@
 using CustomersManagement.UI.Contracts;
+using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Models.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
 namespace CustomersManagement.UI.Pages.Tours;
 
+[Authorize(Policy = Policies.TravelAgency)]
 public partial class Index
 {
     [Inject]

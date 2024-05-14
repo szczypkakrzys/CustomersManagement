@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -6,6 +7,12 @@
     <main>
         <Layout>
             <Layout>
+                <AuthorizeView>
+                    <Authorized>
+                        <LayoutHeader />
+                    </Authorized>
+                </AuthorizeView>
+                 
                 <Content Style=" margin: 24px 16px 0;">
                     <div class="site-layout-background" style="padding: 24px; min-height: 100vh;">
                         @Body

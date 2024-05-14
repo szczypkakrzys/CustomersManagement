@@ -1,4 +1,5 @@
-﻿using CustomersManagement.Application.Features.Tours.Commands.CreateTour;
+﻿using CustomersManagement.Api.Models;
+using CustomersManagement.Application.Features.Tours.Commands.CreateTour;
 using CustomersManagement.Application.Features.Tours.Commands.DeleteTour;
 using CustomersManagement.Application.Features.Tours.Commands.UpdateTour;
 using CustomersManagement.Application.Features.Tours.Queries.GetAllTourParticipants;
@@ -12,7 +13,7 @@ namespace CustomersManagement.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+[Authorize(Policy = Policies.TravelAgency)]
 public class ToursController : Controller
 {
     private readonly IMediator _mediator;

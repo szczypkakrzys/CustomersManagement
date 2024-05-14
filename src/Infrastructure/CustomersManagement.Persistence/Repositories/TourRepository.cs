@@ -18,4 +18,16 @@ public class TourRepository : GenericRepository<Tour>, ITourRepository
                             .AsNoTracking()
                             .FirstOrDefaultAsync(q => q.Id == id);
     }
+
+    public async Task<List<Tour>> GetToursWithRelationsByDate(DateOnly date)
+    {
+        return await _context.Tours
+           .Where(tour => tour.TimeStart == date
+                          || tour.AdvancePaymentDeadline == date
+                          || tour.EntireAmountPaymentDeadline == date
+                          || tour.TimeEnd == date)
+           .Include(p => p.TourRelations)
+           .AsNoTracking()
+           .ToListAsync();
+    }
 }

@@ -1,4 +1,5 @@
-﻿using CustomersManagement.Application.Features.DivingSchoolCustomers.Commands.AssignCustomerToCourse;
+﻿using CustomersManagement.Api.Models;
+using CustomersManagement.Application.Features.DivingSchoolCustomers.Commands.AssignCustomerToCourse;
 using CustomersManagement.Application.Features.DivingSchoolCustomers.Commands.CreateDivingSchoolCustomer;
 using CustomersManagement.Application.Features.DivingSchoolCustomers.Commands.DeleteDivingSchoolCustomer;
 using CustomersManagement.Application.Features.DivingSchoolCustomers.Commands.RemoveCustomerFromCourse;
@@ -16,7 +17,7 @@ namespace CustomersManagement.Api.Controllers;
 
 [Route("api/DivingSchool/Customers/")]
 [ApiController]
-[Authorize]
+[Authorize(Policy = Policies.DivingSchool)]
 public class DivingSchoolCustomerController : Controller
 {
     private readonly IMediator _mediator;

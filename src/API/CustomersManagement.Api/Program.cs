@@ -1,5 +1,7 @@
 using CustomersManagement.Api.Middleware;
+using CustomersManagement.Api.Models;
 using CustomersManagement.Application;
+using CustomersManagement.Application.Models.Identity;
 using CustomersManagement.Identity;
 using CustomersManagement.Infrastructure;
 using CustomersManagement.Persistence;
@@ -25,6 +27,14 @@ builder.Services.AddCors(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(Policies.TravelAgency, policy =>
+         policy.RequireRole(RoleName.Administrator, RoleName.TravelAgencyEmployee));
+    options.AddPolicy(Policies.DivingSchool, policy =>
+         policy.RequireRole(RoleName.Administrator, RoleName.DivingSchoolEmployee));
+});
 
 var app = builder.Build();
 

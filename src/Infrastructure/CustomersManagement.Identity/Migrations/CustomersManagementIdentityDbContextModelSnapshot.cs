@@ -99,7 +99,7 @@ namespace CustomersManagement.Identity.Migrations
                         {
                             Id = "fd7be93d-a089-4801-9de5-c5aa64c97962",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "516498bf-7da1-4488-92b9-b79e78556830",
+                            ConcurrencyStamp = "8b089f60-48cd-4cb5-ad6b-78ac7e6ad1ca",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -107,9 +107,9 @@ namespace CustomersManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBCqd6HGJL9ZkDqpL1Whk0PvxarUn2D2pBSxXa7pv3geHgrE/ufOsu9WtctjJAUldA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE3wESN6w38+l61monzgcvWcm9qsAqxXf1u7YvZo77WcJ+IZuUqXx25nYH+0Wbul2Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1ff6d419-4c5b-44bb-931e-6610c6b0d62b",
+                            SecurityStamp = "66a15794-1d7b-48f5-b12f-d35054d02651",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -117,7 +117,7 @@ namespace CustomersManagement.Identity.Migrations
                         {
                             Id = "90ebb8bd-27fc-4c78-968f-9d93d267a502",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4579bc2c-2b6f-4859-b8aa-947790f332e4",
+                            ConcurrencyStamp = "b85ed4ba-de55-4db4-a546-cec1da3f99f6",
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
@@ -125,9 +125,9 @@ namespace CustomersManagement.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIFXlkPvXZuPo1p1pdVyUUhjcvOJ/UhePoggghYopRMNLbgqiIMzi1a36RG8syrqbw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENo8SoKOSyndxKf996QIzvoWwiYOSRb2BU10lhjaAdIocN39DI4p+ebMfwFYLfBzRA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4f3d0f1e-251f-4baa-9bd4-c4c4be25c8fb",
+                            SecurityStamp = "a3344fbf-cf62-4708-9310-b7594dab7bdf",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });
@@ -168,9 +168,15 @@ namespace CustomersManagement.Identity.Migrations
                         },
                         new
                         {
+                            Id = "d763c0cd-a5bc-4721-8421-ac4a37071495",
+                            Name = "Travel Agency Employee",
+                            NormalizedName = "TRAVEL AGENCY EMPLOYEE"
+                        },
+                        new
+                        {
                             Id = "5bb93284-b026-4ed1-a331-5533e757a143",
-                            Name = "Employee",
-                            NormalizedName = "EMPLOYEE"
+                            Name = "Diving School Employee",
+                            NormalizedName = "DIVING SCHOOL EMPLOYEE"
                         });
                 });
 

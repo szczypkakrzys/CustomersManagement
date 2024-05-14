@@ -23,12 +23,12 @@ public partial class Register
 
     protected async Task HandleRegister()
     {
-        var result = await AuthService.RegisterAsync(Model);
+        //var result = await AuthService.RegisterAsync(Model);
 
-        if (result)
-        {
-            NavManager.NavigateTo("/");
-        }
-        Message = "Something went wrong, please try again.";
+        //if (result)
+        //{
+        //    NavManager.NavigateTo("/");
+        //}
+        //Message = "Something went wrong, please try again.";
     }
 }

@@ -9,4 +9,5 @@ public interface IDivingSchoolCustomerRepository : IGenericRepository<DivingScho
         string firstName,
         string lastName,
         string emailAddress);
+    Task<IEnumerable<DivingSchoolCustomer>> GetCustomersByDateOfBirth(DateOnly date);
 }
