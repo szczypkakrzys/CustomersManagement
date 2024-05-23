@@ -43,6 +43,7 @@ public class MappingConfig : Profile
         CreateMap<CourseDetailsVM, UpdateTourCommand>();
 
         CreateMap<EmailVM, SendEmailCommand>();
+        CreateMap<EmailTemplateDto, EmailTemplateVM>();
 
         CreateMap<Employee, EmployeeVM>();
         CreateMap<RegisterVM, RegisterNewUserCommand>();

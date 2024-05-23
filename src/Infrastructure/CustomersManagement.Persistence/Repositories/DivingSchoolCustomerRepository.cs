@@ -11,6 +11,14 @@ public class DivingSchoolCustomerRepository : GenericRepository<DivingSchoolCust
     {
     }
 
+    public new async Task<DivingSchoolCustomer?> GetByIdAsync(int id)
+    {
+        return await _context.Set<DivingSchoolCustomer>()
+                            .Include(p => p.Address)
+                            .AsNoTracking()
+                            .FirstOrDefaultAsync(q => q.Id == id);
+    }
+
     public async Task<DivingSchoolCustomer> GetByIdWithTours(int id)
     {
         var customer = await _context.Set<DivingSchoolCustomer>()
@@ -38,7 +46,8 @@ public class DivingSchoolCustomerRepository : GenericRepository<DivingSchoolCust
     public async Task<IEnumerable<DivingSchoolCustomer>> GetCustomersByDateOfBirth(DateOnly date)
     {
         return await _context.DivingSchoolCustomers
-           .Where(customer => customer.DateOfBirth == date)
+            .Where(customer => customer.DateOfBirth.Day == date.Day
+                               && customer.DateOfBirth.Month == date.Month)
            .ToListAsync();
     }
 }

@@ -24,12 +24,19 @@ public class EmailService : BaseHttpService, IEmailService
         {
             await AddBearerToken();
             var sendEmailCommand = _mapper.Map<SendEmailCommand>(email);
-            await _client.EmailAsync(sendEmailCommand);
+            await _client.EmailPOSTAsync(sendEmailCommand);
             return new Response<Guid>() { IsSuccess = true };
         }
         catch (ApiException ex)
         {
             return ConvertApiExceptions<Guid>(ex);
         }
+    }
+
+    public async Task<List<EmailTemplateVM>> GetTemplates(EmailType type)
+    {
+        await AddBearerToken();
+        var templates = await _client.EmailAllAsync(type);
+        return _mapper.Map<List<EmailTemplateVM>>(templates);
     }
 }

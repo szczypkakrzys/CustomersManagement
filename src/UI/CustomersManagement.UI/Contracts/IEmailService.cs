@@ -6,4 +6,5 @@ namespace CustomersManagement.UI.Contracts;
 public interface IEmailService
 {
     Task<Response<Guid>> SendEmail(EmailVM email);
+    Task<List<EmailTemplateVM>> GetTemplates(EmailType type);
 }

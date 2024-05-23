@@ -62,7 +62,8 @@ public class TravelAgencyCustomerRepository : GenericRepository<TravelAgencyCust
     public async Task<IEnumerable<TravelAgencyCustomer>> GetCustomersByDateOfBirth(DateOnly date)
     {
         return await _context.TravelAgencyCustomers
-           .Where(customer => customer.DateOfBirth == date)
+           .Where(customer => customer.DateOfBirth.Day == date.Day
+                              && customer.DateOfBirth.Month == date.Month)
            .ToListAsync();
     }
 }

@@ -17,7 +17,7 @@ namespace Cutomers.Api.Controllers;
 
 [Route("api/TravelAgency/Customers/")]
 [ApiController]
-[Authorize(Policy = Policies.DivingSchool)]
+[Authorize(Policy = Policies.TravelAgency)]
 public class TravelAgencyCustomersController : ControllerBase
 {
     private readonly IMediator _mediator;

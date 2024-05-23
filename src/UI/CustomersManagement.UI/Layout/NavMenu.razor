@@ -26,28 +26,48 @@
         </AuthorizeView>
 
         <AuthorizeView Policy="@Policies.TravelAgency">
-                <SubMenu Key="sub1" TitleTemplate=@sub1Title Style="font-size: 16px">
-                    <MenuItem Key="3" Icon="team" RouterLink="travelagency/customers/" Style="font-size: 16px">
-                        Klienci
-                    </MenuItem>
-                    <MenuItem Key="4" Icon="compass" RouterLink="travelagency/tours/" Style="font-size: 16px">
-                        Wycieczki
-                    </MenuItem>
-                </SubMenu>
+            <SubMenu Key="sub1" TitleTemplate=@sub1Title Style="font-size: 16px">
+                <MenuItem Key="3" Icon="team" RouterLink="travelagency/customers/" Style="font-size: 16px">
+                    Klienci
+                </MenuItem>
+                <MenuItem Key="4" Icon="compass" RouterLink="travelagency/tours/" Style="font-size: 16px">
+                    Wycieczki
+                </MenuItem>
+            </SubMenu>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="@Roles.TravelAgencyEmployee">
+            <MenuItem Key="16" Icon="mail" RouterLink="/travelagency/newsletter/" Style="font-size: 16px">
+                Newsletter
+            </MenuItem>
         </AuthorizeView>
 
         <AuthorizeView Policy="@Policies.DivingSchool">
-                <SubMenu Key="sub2" TitleTemplate=@sub2Title Style="font-size: 16px">
-                    <MenuItem Key="5" Icon="team" RouterLink="divingschool/customers/" Style="font-size: 16px">
-                        Klienci
-                    </MenuItem>
-                    <MenuItem Key="6" Icon="schedule" RouterLink="divingschool/courses/" Style="font-size: 16px">
-                        Kursy
-                    </MenuItem>
-                </SubMenu>
+            <SubMenu Key="sub2" TitleTemplate=@sub2Title Style="font-size: 16px">
+                <MenuItem Key="5" Icon="team" RouterLink="divingschool/customers/" Style="font-size: 16px">
+                    Klienci
+                </MenuItem>
+                <MenuItem Key="6" Icon="schedule" RouterLink="divingschool/courses/" Style="font-size: 16px">
+                    Kursy
+                </MenuItem>
+            </SubMenu>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="@Roles.DivingSchoolEmployee">
+            <MenuItem Key="15" Icon="mail" RouterLink="divingschool/newsletter/" Style="font-size: 16px">
+                Newsletter
+            </MenuItem>
         </AuthorizeView>
 
         <AuthorizeView Roles="@Roles.Administrator">
+            <SubMenu Key="sub4" TitleTemplate=@newsletter Style="font-size: 16px">
+                <MenuItem Key="13" Icon="mail" RouterLink="travelagency/newsletter/" Style="font-size: 16px">
+                    Biuro podróży
+                </MenuItem>
+                <MenuItem Key="14" Icon="mail" RouterLink="divingschool/newsletter/" Style="font-size: 16px">
+                    Szkoła nurkowa
+                </MenuItem>
+            </SubMenu>
             <SubMenu Key="sub3" TitleTemplate=@sub3Title Style="font-size: 16px">
                 <MenuItem Key="10" Icon="user" RouterLink="/users/?role={Administrator}" Style="font-size: 16px">
                     Administratorzy
@@ -77,7 +97,7 @@
 {
     RenderFragment sub1Title =
     @<span>
-        <Icon Type="mail" Theme="outline"></Icon>
+        <Icon Type="calendar" Theme="outline"></Icon>
         <span>Biuro podróży</span>
     </span>;
 
@@ -91,5 +111,11 @@
     @<span>
         <Icon Type="customer-service" Theme="outline"></Icon>
         <span>Pracownicy</span>
+    </span>;
+
+    RenderFragment newsletter =
+    @<span>
+        <Icon Type="mail" Theme="outline"></Icon>
+        <span>Newsletter</span>
     </span>;
 }

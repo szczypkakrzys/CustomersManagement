@@ -2,6 +2,7 @@
 using CustomersManagement.Domain;
 using CustomersManagement.Domain.Common;
 using CustomersManagement.Domain.DivingSchool;
+using CustomersManagement.Domain.Email;
 using CustomersManagement.Domain.Notification;
 using CustomersManagement.Domain.TravelAgency;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ public class CustomerDatabaseContext : DbContext
     public DbSet<CustomersDivingCoursesRelations> CustomersDivingCoursesRelations { get; set; }
     public DbSet<Address> Addresses { get; set; }
     public DbSet<Notification> Notifications { get; set; }
+    public DbSet<EmailTemplate> EmailTemplates { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

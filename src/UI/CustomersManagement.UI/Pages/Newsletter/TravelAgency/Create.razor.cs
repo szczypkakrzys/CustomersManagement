@@ -1,11 +1,14 @@
 using AntDesign;
 using Blazored.TextEditor;
 using CustomersManagement.UI.Contracts;
+using CustomersManagement.UI.Models;
 using CustomersManagement.UI.Models.Newsletter;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
-namespace CustomersManagement.UI.Pages.Newsletter;
+namespace CustomersManagement.UI.Pages.Newsletter.TravelAgency;
 
+[Authorize(Policy = Policies.TravelAgency)]
 public partial class Create
 {
 
@@ -53,7 +56,7 @@ public partial class Create
 
         foreach (var email in emails)
         {
-            if (String.IsNullOrWhiteSpace(email)) continue;
+            if (string.IsNullOrWhiteSpace(email)) continue;
 
             ReceiversAddresses.Add(email.Trim());
         }
