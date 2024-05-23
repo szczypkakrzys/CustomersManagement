@@ -1,0 +1,58 @@
+﻿@page "/travelagency/newsletter/templates"
+
+<h3>Wzory wiadomości e-mail</h3>
+
+<div class="container" style="padding: 20px;">
+    @if (EmailTemplates != null && EmailTemplates.Count > 0)
+    {
+        int rowCount = (int)Math.Ceiling((double)EmailTemplates.Count / 3.0);
+        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
+        {
+            <div class="row mb-4">
+                @for (int colIndex = 0; colIndex < 3; colIndex++)
+                {
+                    int templateIndex = rowIndex * 3 + colIndex;
+                    if (templateIndex < EmailTemplates.Count)
+                    {
+                        var template = EmailTemplates[templateIndex];
+                        <div class="col-md-4">
+                            <Card Bordered="true" Title=@template.Name>
+                                <Body>
+                                    <div>
+                                        @ShowTemplate(template.Content)
+                                    </div>
+                                </Body>
+                                <ActionTemplate>
+                                    <CardAction><Icon Type="edit" />Wybierz</CardAction>
+                                    <CardAction><Icon Type="copy" OnClick="@(() => OpenPreviewModal(template))" />Podgląd</CardAction>
+                                    <CardAction><Icon Type="Delete" />Usuń</CardAction>
+                                </ActionTemplate>
+
+                            </Card>
+                        </div>
+                        
+                    }
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p>Loading templates...</p>
+    }
+</div>
+
+<Modal Title="@previewTitle"
+       Visible="@previewModalVisible"
+       OnOk="@(()=>{ previewModalVisible = false; })"
+       OnCancel="@(()=>{ previewModalVisible = false; })"
+       Footer="@ModalFooter.DefaultOkFooter"
+       Maximizable="true"
+       Resizable="true"
+       Style="width: 80%"
+       Centered="true">
+    <div class="modal-content" style="overflow: auto; padding: 20px;">
+        @previewContent
+    </div>
+</Modal>
+

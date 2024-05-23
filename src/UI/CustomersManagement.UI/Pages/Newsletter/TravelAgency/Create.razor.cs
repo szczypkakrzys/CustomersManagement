@@ -38,8 +38,15 @@ public partial class Create
 
     bool MessageSuccessModalVisible = false;
 
-    //TODO
-    //configure this to have property on body, to allow create this component with predefined contents
+    private MarkupString htmlContent;
+    private bool previewModalVisible = false;
+
+    private async Task OpenPreviewModal()
+    {
+        string htmlString = await QuillHtml.GetHTML();
+        htmlContent = (MarkupString)htmlString;
+        previewModalVisible = true;
+    }
 
     private void UpdateEmailList(ChangeEventArgs e)
     {
@@ -71,6 +78,7 @@ public partial class Create
     private async Task SendMessage()
     {
         email.EmailContent = await QuillHtml.GetHTML();
+        await Console.Out.WriteLineAsync(email.EmailContent);
         email.ReceiversAddresses = ReceiversAddresses;
         email.Subject = Subject;
 
@@ -79,12 +87,15 @@ public partial class Create
         if (response.IsSuccess)
         {
             MessageSuccessModalVisible = true;
-            //TODO
-            //navigate to newsletter main page
         }
         else
         {
             _message.Error("Nie uda³o siê wys³aæ wiadomoœci");
         }
+    }
+
+    private void OpenTemplates()
+    {
+        _navManager.NavigateTo("/travelagency/newsletter/templates");
     }
 }

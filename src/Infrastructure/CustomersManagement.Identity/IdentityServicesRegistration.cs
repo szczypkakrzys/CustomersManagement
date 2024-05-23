@@ -22,8 +22,6 @@ public static class IdentityServicesRegistration
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
         services.AddDbContext<CustomersManagementIdentityDbContext>(options =>
-            //TODO
-            //consider standalone database for authentication purposes
             options.UseSqlServer(configuration.GetConnectionString("CustomersDatabaseConnectionString")));
 
         services.AddIdentity<ApplicationUser, IdentityRole>()

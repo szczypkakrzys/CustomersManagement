@@ -10,8 +10,6 @@ public class EmailSender : IEmailSender
 {
     public EmailSettings _emailSettings { get; }
 
-    //TODO
-    //separate to different settings both for travel agency and diving school
     public EmailSender(IOptions<EmailSettings> emailSettings)
     {
         _emailSettings = emailSettings.Value;

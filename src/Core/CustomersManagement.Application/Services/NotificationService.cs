@@ -24,8 +24,6 @@ public class NotificationService : INotificationService
         _mapper = mapper;
     }
 
-    //TODO
-    //add users to Id's collection - create one notification with 'Birthday' message and users collection in Id's 
     public List<Notification> ProcessCustomersBirthdaysNotifications(List<string> customers, NotificationType type, DateOnly date)
     {
         List<Notification> notificationsList = [];

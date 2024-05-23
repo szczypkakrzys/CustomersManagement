@@ -4,10 +4,10 @@ using CustomersManagement.UI.Models.Newsletter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
-namespace CustomersManagement.UI.Pages.Newsletter.DivingSchool;
+namespace CustomersManagement.UI.Pages.Newsletter.TravelAgency;
 
-[Authorize(Policy = Policies.DivingSchool)]
-public partial class Templates
+[Authorize(Policy = Policies.TravelAgency)]
+public partial class Templates : ComponentBase
 {
     [Inject]
     public IEmailService EmailService { get; set; }
@@ -38,6 +38,7 @@ public partial class Templates
 
     private async Task LoadTemplates()
     {
-        EmailTemplates = await EmailService.GetTemplates(Services.Base.EmailType._1);
+        EmailTemplates = await EmailService.GetTemplates(Services.Base.EmailType._0);
     }
 }
+

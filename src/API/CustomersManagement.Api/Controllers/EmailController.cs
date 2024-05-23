@@ -12,8 +12,6 @@ namespace CustomersManagement.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-//TODO
-//authorize with proper roles / policies
 public class EmailController : Controller
 {
     private readonly IMediator _mediator;
@@ -37,8 +35,6 @@ public class EmailController : Controller
     [ProducesDefaultResponseType]
     public async Task<IActionResult> PostTemplate(CreateEmailTemplateCommand template)
     {
-        //TODO
-        //fix responses
         var response = await _mediator.Send(template);
         return CreatedAtAction(nameof(GetTemplates), new { id = response });
     }

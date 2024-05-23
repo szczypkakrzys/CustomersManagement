@@ -29,9 +29,6 @@ public class UserService : IUserService
 
     public string UserId { get => _contextAccessor.HttpContext?.User?.FindFirstValue("uid"); }
 
-    //TODO
-    //resolve issue with automapper mapping
-
     public async Task<List<Employee>> GetEmployees()
     {
         var employees = await _userManager.GetUsersInRoleAsync("Employee");
@@ -114,8 +111,6 @@ public class UserService : IUserService
         }
     }
 
-    //TODO
-    //blocking / uncblocking accounts
     public async Task BlockEmloyee(string userId)
     {
         var employee = await _userManager.FindByIdAsync(userId);

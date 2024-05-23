@@ -87,8 +87,6 @@ public partial class Create
         if (response.IsSuccess)
         {
             MessageSuccessModalVisible = true;
-            //TODO
-            //navigate to newsletter main page
         }
         else
         {
